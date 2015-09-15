@@ -1,0 +1,237 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4 class="page-header">Dashboard</h4>
+
+      <div class="row">
+        <div class="panel panel-stats col-md-3">
+          <div class="panel-heading text-center bg-info">
+            <h3 style="margin-top: 10px;">{{stats.countYear + stats.countMonth + stats.countWeek}}</h3>
+            <p>Leads</p>
+          </div>
+          <div class="list-justified-container">
+            <ul class="list-justified text-center">
+              <li>
+                <p class="size-h3">{{stats.countYear}}</p>
+                <p class="text-muted">This Year</p>
+              </li>
+              <li>
+                <p class="size-h3">{{stats.countMonth}}</p>
+                <p class="text-muted">This Month</p>
+              </li>
+              <li>
+                <p class="size-h3">{{stats.countWeek}}</p>
+                <p class="text-muted">This Week</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel panel-stats col-md-3">
+          <div class="panel-heading text-center bg-primary">
+            <h4 style="vertical-align: middle;">Completion Rate</h4>
+          </div>
+          <div class="list-justified-container">
+            <ul class="list-justified text-left">
+              <li>
+                <p style="float:right;font-size: 23px;line-height: 43px;color: #3c763d;">
+                  {{bestQuiz.percentCompleted}} <span style="font-size:12px">%</span>
+                </p>
+                <p class="size-h4" style="color: #3c763d;" tooltip="{{bestQuiz.title}}">{{bestQuiz.title | limitTo: 10}} {{bestQuiz.title.length > 10 ? '...' : ''}}</p>
+                <p class="text-muted">Best</p>
+              </li>
+              <li>
+                <p style="float:right;font-size: 23px;line-height: 43px;color: #a94442;">
+                  {{worstQuiz.percentCompleted}} <span style="font-size:12px">%</span>
+                </p>
+                <p class="size-h4" style="color: #a94442;" tooltip="{{worstQuiz.title}}">{{worstQuiz.title | limitTo: 10}} {{worstQuiz.title.length > 10 ? '...' : ''}}</p>
+                <p class="text-muted">Worst</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6 amcharts">
+          <impression-chart config="stats.graphData"></impression-chart>
+        </div>
+
+        <!--<div class="panel panel-stats col-md-3" style="background-color: #fcf8e3; height: 200px;padding: 20px 30px;border-radius: 4px;">-->
+          <!--<h4 style="vertical-align: middle;margin: 10px 0 20px 0;color: #8a6d3b;">Completion Rate</h4>-->
+          <!--<div>-->
+            <!--<div style="display: inline-block; width: 40%;margin-left: 10px;">-->
+              <!--<p style="font-size: 17px;margin-bottom: 0px;color: #3c763d;">Best</p>-->
+              <!--<p class="ng-binding" style="font-size: 15px;color: #337ab7;margin-bottom: 0px;">{{bestQuiz.title}}</p>-->
+            <!--</div>-->
+            <!--<div style="display: inline-block; width: auto;vertical-align: top;">-->
+              <!--<p class="ng-binding" style="color: #3c763d;font-size: 30px;margin-bottom: 0px;">{{bestQuiz.percentCompleted}} %</p>-->
+            <!--</div>-->
+          <!--</div>-->
+          <!--<div>-->
+            <!--<div style="display: inline-block; width: 40%;margin-left: 10px;">-->
+              <!--<p style="font-size: 17px;margin-bottom: 0px;color: #3c763d;">Best</p>-->
+              <!--<p class="ng-binding" style="font-size: 15px;color: #337ab7;margin-bottom: 0px;">{{worstQuiz.title}}</p>-->
+            <!--</div>-->
+            <!--<div style="display: inline-block; width: auto;vertical-align: top;">-->
+              <!--<p class="ng-binding" style="color: #3c763d;font-size: 30px;margin-bottom: 0px;">{{worstQuiz.percentCompleted}} %</p>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+
+      </div>
+
+      <section class="panel panel-default table-dynamic top-buffer">
+        <div class="table-filters">
+          <div class="row">
+            <div class="col-md-4">
+              <form>
+                <input type="text"
+                       placeholder="Search Quiz"
+                       class="form-control"
+                       data-ng-model="searchKeywords"
+                       data-ng-keyup="search()">
+              </form>
+            </div>
+            <div class="col-md-3 filter-result-info">
+                            <span>
+                                Showing {{filteredQuizzes.length}}/{{quizzes.length}} quizzes
+                            </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive table-bordered">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>
+                <div class="th">
+                  Quiz
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('title') "
+                                      data-ng-class="{active: row == 'title'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-title') "
+                                      data-ng-class="{active: row == '-title'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Impressions
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('landed') "
+                                      data-ng-class="{active: row == 'landed'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-landed') "
+                                      data-ng-class="{active: row == '-landed'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Quiz Completed
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('completed') "
+                                      data-ng-class="{active: row == 'completed'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-completed') "
+                                      data-ng-class="{active: row == '-completed'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Leads
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('leadCount') "
+                                      data-ng-class="{active: row == 'leadCount'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-leadCount') "
+                                      data-ng-class="{active: row == '-leadCount'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Cost Per Lead
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('startedAt') "
+                                      data-ng-class="{active: row == 'startedAt'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-startedAt') "
+                                      data-ng-class="{active: row == '-startedAt'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  CPL Update Date
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('lastLead') "
+                                      data-ng-class="{active: row == 'lastLead'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-lastLead') "
+                                      data-ng-class="{active: row == '-lastLead'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Action
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="quiz in currentPageQuizzes">
+              <td style="max-width: 150px;">{{quiz.title}}</td>
+              <td>{{quiz.landed}}</td>
+              <td>{{quiz.completed}} ({{quiz.percentCompleted}}%)</td>
+              <td>{{quiz.leadCount}} ({{quiz.percentLeadCount}}%)</td>
+              <td>{{getCostPerCount(quiz)}}</td>
+              <td>{{quiz.costUpdatedAt|date:'dd MMM yyyy'}}</td>
+              <td class="icon-btns">
+                <span class="glyphicon glyphicon-off" data-ng-click="activate(quiz)" data-ng-hide="isActive(quiz)"
+                      tooltip="Activate"></span>
+                <span class="glyphicon glyphicon-ban-circle" data-ng-click="deactivate(quiz)"
+                      data-ng-show="isActive(quiz)" tooltip="Deactivate"></span>
+                <span class="glyphicon glyphicon-link" data-ng-click="directLink(quiz)" tooltip="Direct Link"></span>
+                <span class="glyphicon glyphicon-pushpin" data-ng-click="embedLink(quiz)" tooltip="Embed Code"></span>
+                <span class="glyphicon glyphicon-usd" data-ng-click="updateCost(quiz)" tooltip="Update Cost"></span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="table-footer">
+          <div class="row">
+            <div class="col-md-6 page-num-info">
+                            <span>
+                                Show
+                                <select data-ng-model="numPerPage"
+                                        data-ng-options="num for num in numPerPageOpt"
+                                        data-ng-change="onNumPerPageChange()">
+                                </select>
+                                quizzes per page
+                            </span>
+            </div>
+            <div class="col-md-6 text-right pagination-container">
+              <pagination class="pagination-sm"
+                          ng-model="currentPage"
+                          total-items="filteredQuizzes.length"
+                          max-size="4"
+                          ng-change="select(currentPage)"
+                          items-per-page="numPerPage"
+                          rotate="false"
+                          boundary-links="true"></pagination>
+            </div>
+          </div>
+        </footer>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'components/navbar/navbar-bottom.html'"></div>

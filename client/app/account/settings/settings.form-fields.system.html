@@ -1,0 +1,78 @@
+<section class="panel table-dynamic">
+  <div class="page-header" style="margin-top: 20px;">
+    <h3>System Fields</h3>
+  </div>
+
+  <div class="table-responsive table-bordered" style="border: 1px solid #ddd;">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="th">
+            Form Field
+            <span class="glyphicon glyphicon-chevron-up"
+                  data-ng-click=" orderSystemFields('name') "
+                  data-ng-class="{active: rowSystem == 'name'}"></span>
+            <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderSystemFields('-name') "
+                  data-ng-class="{active: rowSystem == '-name'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Field Label
+            <span class="glyphicon glyphicon-chevron-up"
+                  data-ng-click=" orderSystemFields('label') "
+                  data-ng-class="{active: rowSystem == 'label'}"></span>
+            <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderSystemFields('-label') "
+                  data-ng-class="{active: rowSystem == '-label'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Field Type
+            <span class="glyphicon glyphicon-chevron-up"
+                  data-ng-click=" orderSystemFields('type') "
+                  data-ng-class="{active: rowSystem == 'type'}"></span>
+            <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderSystemFields('-type') "
+                  data-ng-class="{active: rowSystem == '-type'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Required
+            <span class="glyphicon glyphicon-chevron-up"
+                  data-ng-click=" orderSystemFields('required') "
+                  data-ng-class="{active: rowSystem == 'required'}"></span>
+            <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderSystemFields('-required') "
+                  data-ng-class="{active: rowSystem == '-required'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Visible/Hidden
+            <span class="glyphicon glyphicon-chevron-up"
+                  data-ng-click=" orderSystemFields('visible') "
+                  data-ng-class="{active: rowSystem == 'visible'}"></span>
+            <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderSystemFields('-visible') "
+                  data-ng-class="{active: rowSystem == '-visible'}"></span>
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="field in systemFields">
+        <td style="max-width: 300px;">{{field.name}}</td>
+        <td>{{field.label}}</td>
+        <td>{{field.type}}</td>
+        <td>{{field.required}}</td>
+        <td>{{field.visible}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

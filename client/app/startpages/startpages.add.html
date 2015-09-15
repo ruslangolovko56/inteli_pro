@@ -1,0 +1,79 @@
+<section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{editable ? 'Edit Start Page' : 'Add New Start Page' }}</strong></div>
+    <div class="panel-body">
+        <form name="form_startpage" novalidate class="form-validation">
+            <div class="form-group">
+                <label for="">Tags</label>
+                <tags-input class="bootstrap"
+                            data-ng-model="startPage.tags"
+                            placeholder=" Add a tag"
+                            add-on-blur="false"
+                            allow-leftover-text="true"
+                            replace-spaces-with-dashes="false">
+                </tags-input>
+            </div>
+
+            <div class="form-group">
+                <label for="">Start Page Title <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter title" ng-model="startPage.title" required>
+            </div>
+
+            <div data-ng-file-drop="onFileSelect($files, $index)"
+                 data-ng-file-drag-over-class="another-file-over-class"
+                 class="well my-drop-zone drop-box"
+                 data-ng-show="startPage.status!='uploaded'"
+                 required>
+                <div data-ng-show="startPage.status==''">
+                    Drag and drop file here or <input type="file"
+                                                      ng-file-select="onFileSelect($files, $index)"
+                                                      class="input-file"
+                                                      accept="image/*">
+                </div>
+                <!--<div>-->
+                <!--<progressbar max="max" value="dynamic"><span>{{dynamic}} / {{max}}</span></progressbar>-->
+                <!--<button class="btn btn-ttc" type="button" ng-click="abort($index)" ng-show="file.progress != 100">Abort</button>-->
+                <!--</div>-->
+                <div data-ng-show="startPage.status=='uploading'">
+                    <div class="progress">
+                        <progressbar class="progress-striped active"
+                                     max="max"
+                                     value="progress">
+                            <span>{{progress}} / {{max}}</span>
+                        </progressbar>
+                    </div>
+                    <!--<button class="btn btn-ttc" type="button" ng-click="abort($index)" ng-show="progress != max">Abort</button>-->
+                </div>
+            </div>
+
+            <div data-ng-show="startPage.status=='uploaded'"
+                 class="text-center" style="display: table;">
+                <div style="width: auto; height: auto; position: relative; float:left; margin-bottom: 15px;">
+                    <span class="glyphicon glyphicon-remove-sign on-image-btn-remove" data-ng-click="deleteAttachment()"></span>
+                    <img data-ng-src="{{startPage.attachment.location}}"
+                         class="img-thumbnail img-responsive"
+                         style="max-height: 100px;">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Start Page Instructions</label>
+                <textarea class="form-control" rows="4" data-ng-model="startPage.instruction" placeholder="Enter instruction" ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="">Button Text <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Enter buton text" ng-model="startPage.buttonText" required>
+            </div>
+
+            <div class="text-right" style="margin-top: 5px">
+                <button type="button" class="btn btn-primary" data-ng-click="addNew()" style="margin-right: 20px" data-ng-hide="editable">Add another</button>
+                <button type="submit" class="btn btn-success" data-ng-click="save()" data-ng-disabled="!canSubmit()">Save</button>
+                <button type="button" class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
+            </div>
+
+            <div class="callout callout-info">
+                <p>Save button will be active only when all necessary fields are valid.</p>
+            </div>
+        </form>
+    </div>
+</section>

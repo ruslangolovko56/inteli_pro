@@ -1,0 +1,90 @@
+<!--<script type="text/javascript">-->
+    (function (window, undefined) {
+        var HOST = '<%=host %>';
+
+        var Quiz = function(el, index) {
+            var frame;
+
+            this.el = el;
+            this.quizId = el.getAttribute('data-quiz');
+            if(!this.quizId) return null;
+            this.index = index;
+            this.quizUrl = this.buildQuizUrl();
+
+            frame = this.frame = this.createFrame();
+            this.render(frame);
+        }
+
+        Quiz.prototype.createFrame = function () {
+            var frame = document.createElement('iframe');
+
+            frame.setAttribute('height', '100%');
+
+            frame.setAttribute('id', 'quiz-iframe-' + this.index);
+            frame.setAttribute('width', '100%');
+            frame.setAttribute('allowFullScreen', 'true');
+            frame.setAttribute('frameborder', '0');
+            frame.setAttribute('border', 'none');
+            frame.setAttribute('scrolling', 'no');
+            frame.setAttribute('style', 'max-width: 720px');
+            frame.src = this.quizUrl;
+
+            return this.frame = frame;
+        }
+
+        Quiz.prototype.render = function( iframe ){
+            this.el.appendChild(iframe);
+        }
+
+        Quiz.prototype.buildQuizUrl = function(){
+            var url = HOST + '/s/' + this.quizId + '?embed=true&index='+ this.index;
+
+            return url;
+        }
+
+        Quiz.prototype.resize = function(height) {
+            this.el.style.height = height + 'px';
+        };
+
+        if (window.addEventListener) {
+            window.addEventListener("message", handleMessage, false);
+        }
+        else {
+            if (window.attachEvent) {
+                window.attachEvent("onmessage", handleMessage);
+            }
+        }
+
+        function handleMessage(event) {
+            var data = event.data.split(':');
+
+            if (!data || !data[0] || !data[1] || !data[2]) return;
+
+            var id = data[0],
+                height = data[1],
+                index = data[2];
+
+            if (quizzes[index] && quizzes[index].quizId == id) {
+                quizzes[index].resize(height);
+            }
+        }
+
+        var quizzes = window.quizzes = window.quizzes || [],
+            els = document.querySelectorAll( '.quiz-container' ),
+            elsLength = els.length,
+            el, initialized, quiz, i;
+
+
+        for (i = 0; i < elsLength; i++) {
+            el = els[i];
+            initialized = el.getAttribute('data-qz-initialized') === 'true';
+
+            if (!initialized) {
+                quiz = new Quiz(el, i);
+                el.setAttribute('data-qz-initialized', 'true');
+                quizzes.push(quiz);
+            }
+        }
+
+    }(window));
+<!--</script>-->

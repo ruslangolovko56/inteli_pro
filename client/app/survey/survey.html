@@ -1,0 +1,312 @@
+<div class="container survey-container" em-height-source>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(1)">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2>{{quiz.startPage.title}}</h2>
+        </div>
+      </div>
+      <div class="row bottom-buffer" ng-show="hasAttachment(quiz.startPage)">
+        <div class="col-md-12 text-center">
+          <img data-ng-src="{{quiz.startPage.attachment.location}}"
+               class="img-thumbnail img-responsive"
+               imageonload>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              {{quiz.startPage.instruction}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <button type="button" class="btn btn-primary" data-ng-click="startQuiz()">{{quiz.startPage.buttonText}}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(2)">
+      <div ng-if="isType(1)">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>{{question.data.text}}</h2>
+          </div>
+        </div>
+        <div class="row" ng-show="hasAttachment(question.data)">
+          <div class="col-md-12 text-center">
+            <img data-ng-src="{{question.data.attachment.location}}"
+                 class="img-thumbnail img-responsive"
+                 imageonload>
+          </div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-md-6" ng-repeat="answer in question.data.answers">
+            <div data-ng-class="isChecked(answer._id) ? 'panel panel-danger' : 'panel panel-info'">
+              <div
+                data-ng-class="isChecked(answer._id) ? 'panel-body text-center bg-danger' : 'panel-body text-center bg-info'"
+                style="cursor: pointer;" ng-click="check(answer)">
+                <div class="row" data-ng-show="hasAttachment(answer)">
+                  <div class="col-md-10 col-md-offset-1">
+                    <img data-ng-src="{{answer.attachment.location}}"
+                         class="img-thumbnail img-responsive"
+                         style="height: 150px"
+                         imageonload>
+                  </div>
+                </div>
+                <div class="row">
+                  <h4>{{answer.text}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="isType(2)">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>{{question.data.text}}</h2>
+          </div>
+        </div>
+        <div class="row" ng-show="hasAttachment(question.data)">
+          <div class="col-md-12 text-center">
+            <img data-ng-src="{{question.data.attachment.location}}"
+                 class="img-thumbnail img-responsive"
+                 imageonload>
+          </div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-md-12">
+            <div class="form-group">
+              <textarea class="form-control"
+                        placeholder="Type your answer"
+                        data-ng-model="question.answer"
+                        rows="6"
+                        required></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="isType(3)">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>{{question.data.text}}</h2>
+          </div>
+        </div>
+        <div class="row" ng-show="hasAttachment(question.data)">
+          <div class="col-md-12 text-center">
+            <img data-ng-src="{{question.data.attachment.location}}"
+                 class="img-thumbnail img-responsive"
+                 imageonload>
+          </div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="text" class="form-control"
+                     placeholder="Type your answer"
+                     data-ng-model="question.answer"
+                     required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-if="isType(4)">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h2>{{question.data.text}}</h2>
+          </div>
+        </div>
+        <div class="row" ng-show="hasAttachment(question.data)">
+          <div class="col-md-12 text-center">
+            <img data-ng-src="{{question.data.attachment.location}}"
+                 class="img-thumbnail img-responsive"
+                 imageonload>
+          </div>
+        </div>
+        <div class="row top-buffer">
+          <div class="col-md-12">
+            <div class="form-group">
+              <input type="number" class="form-control"
+                     placeholder="Type your answer"
+                     data-ng-model="question.answer"
+                     required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" data-ng-if="hasButton()">
+        <div class="col-md-12 text-center">
+          <button type="button" class="btn btn-info" data-ng-click="back()" data-ng-hide="isFirst()">Back</button>
+          <button type="button" class="btn btn-primary" data-ng-click="next()">Next</button>
+        </div>
+      </div>
+      <div class="row" data-ng-if="!isType(1) && !hasButton()">
+        <div class="col-md-12 text-center">
+          <button type="button" class="btn btn-primary" data-ng-click="next()">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(4)">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2>{{resultsPage.name}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>{{resultsPage.description}}</h5>
+        </div>
+      </div>
+      <div class="row" ng-if="resultsPage.beforeResults">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body" ng-bind-html="resultsPage.beforeResults">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-repeat="result in resultsPage.results">
+        <div class="col-md-12 text-center">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>{{result.title}}</h4>
+                </div>
+              </div>
+              <div class="row" data-ng-show="hasAttachment(result)">
+                <div class="col-md-12">
+                  <img data-ng-src="{{result.attachment.location}}"
+                       class="img-thumbnail img-responsive"
+                       imageonload>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h5>{{result.description}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-if="resultsPage.afterResults">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body" ng-bind-html="resultsPage.afterResults">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-if="exitUrl != ''">
+        <div class="col-md-12 text-center">
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-click="exit()">Visit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(3)">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2>{{form.title}}</h2>
+        </div>
+      </div>
+      <div class="row bottom-buffer" ng-show="hasAttachment(form)">
+        <div class="col-md-12 text-center">
+          <img data-ng-src="{{form.attachment.location}}"
+               class="img-thumbnail img-responsive"
+               imageonload>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              {{form.text}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form name="form_contact" class="form-horizontal form-validation" data-ng-submit="submitForm()">
+                <div class="alert alert-danger" role="alert" ng-if="form.error">
+                  {{form.error}}
+                </div>
+                <div class="form-group" ng-repeat="field in form.fields" ng-if="field.visible">
+                  <div class="col-sm-3">
+                    <label for="">{{field.label}} <span class="text-danger" ng-if="field.required">*</span></label>
+                  </div>
+                  <div class="col-sm-9" ng-if="field.type == 'email'">
+                    <input type="email"
+                           class="form-control"
+                           placeholder="{{field.label}}"
+                           data-ng-model="field.value"
+                           ng-required="field.required"
+                      >
+                  </div>
+                  <div class="col-sm-9" ng-if="field.type == 'text'">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="{{field.label}}"
+                           data-ng-model="field.value"
+                           ng-required="field.required"
+                      >
+                  </div>
+                  <div class="col-sm-9" ng-if="field.type == 'number'">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="{{field.label}}"
+                           data-ng-model="field.value"
+                           ng-required="field.required"
+                      >
+                  </div>
+                  <div class="col-sm-9" ng-if="field.type == 'textarea'">
+                    <textarea rows="4"
+                              class="form-control"
+                              placeholder="{{field.label}}"
+                              data-ng-model="field.value"
+                              ng-required="field.required"
+                      ></textarea>
+                  </div>
+                </div>
+                <button type="submit"
+                        class="btn btn-primary"
+                        data-ng-disabled="!canSubmit()">{{form.buttonText}}
+                </button>
+                <div class="callout callout-info">
+                  <p>Submit button will be active only when all fields are valid.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(5)">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3>Thank you for taking the time to answer this survey!</h3>
+        </div>
+      </div>
+      <div class="row" ng-if="exitUrl != ''">
+        <div class="col-md-12 text-center">
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-click="exit()">Visit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

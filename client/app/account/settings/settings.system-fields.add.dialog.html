@@ -1,0 +1,108 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Add System Field</h4>
+</div>
+<div class="modal-body">
+  <form class="form form-validation" name="system_field" novalidate>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Field Name <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-sm-9">
+        <div class="form-group" ng-class="{ 'has-success': system_field.name.$valid && submitted,
+                                            'has-error': system_field.name.$invalid && submitted }">
+          <input type="text" name="name" class="form-control" data-ng-model="field.name" required mongoose-error="">
+
+          <p class="help-block" ng-show="system_field.name.$error.mongoose">
+            {{ errors.name }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Field Label <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-sm-9">
+        <div class="form-group">
+          <input type="text" class="form-control" data-ng-model="field.label" required>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Field Type <span class="text-danger">*</span></label>
+      </div>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <select data-ng-model="field.type"
+                  data-ng-options="type as type for type in types"
+                  class="form-control"
+                  required>
+            <option value="" disabled>Select Type</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Required</label>
+      </div>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" ng-class="{'btn-success': field.required}" ng-model="field.required"
+                 btn-radio="true">Required*</label>
+          <label class="btn btn-default" ng-class="{'btn-success': !field.required}" ng-model="field.required"
+                 btn-radio="false">Optional</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Visible/Hidden</label>
+      </div>
+      <div class="col-sm-9">
+        <div class="btn-group">
+          <label class="btn btn-default" ng-class="{'btn-success': field.visible}" ng-model="field.visible"
+                 btn-radio="true" data-ng-disabled="category == 'answer'">Visible</label>
+          <label class="btn btn-default" ng-class="{'btn-success': !field.visible}" ng-model="field.visible"
+                 btn-radio="false" data-ng-disabled="category == 'answer'">Hidden</label>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': system_field.name.$valid && submitted,
+                                              'has-error': system_field.name.$invalid && submitted }"
+             ng-if="category == 'form' && field.visible == false" style="margin-top: 10px; width: 150px;">
+          <input type="text" name="param" class="form-control" data-ng-model="field.param" placeholder="Url Parameter Label" mongoose-error="">
+
+          <p class="help-block" ng-show="system_field.param.$error.mongoose">
+            {{ errors.param }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Tags</label>
+      </div>
+      <div class="col-sm-9">
+        <div class="form-group">
+          <tags-input class="bootstrap"
+                      data-ng-model="field.tags"
+                      placeholder="Add a tag"
+                      add-on-blur="false"
+                      allow-leftover-text="false"
+                      replace-spaces-with-dashes="false">
+          </tags-input>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" type="submit" data-ng-disabled="!canSubmit(system_field)"
+          data-ng-click="create(system_field)" ng-if="!editable">Create
+  </button>
+  <button class="btn btn-md btn-primary" type="submit" data-ng-disabled="!canSubmit(system_field)"
+          data-ng-click="save(system_field)" ng-if="editable">Save
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancel</button>
+</div>

@@ -1,0 +1,328 @@
+<section class="panel panel-default">
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> View Quiz</strong></div>
+  <div class="panel-body">
+    <form name="form_quiz" novalidate class="form-validation">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="">Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter title" ng-model="quiz.title" required disabled>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="">Market <span class="text-danger">*</span></label>
+
+            <div>
+              <select class="form-control"
+                      data-ng-model="quiz.market"
+                      data-ng-options="market._id as market.name for market in markets"
+                      required disabled>
+                <option value="" disabled>Select market</option>
+              </select>
+              <!--<span class="ui-select">-->
+              <!--<select-->
+              <!--data-ng-model="quiz.market"-->
+              <!--data-ng-options="market._id as market.name for market in markets"-->
+              <!--data-ng-class="quiz.market == null ? 'text-muted' : 'text-info'"-->
+              <!--style="width: 300px;"-->
+              <!--required>-->
+              <!--<option value="" disabled>Select market</option>-->
+              <!--</select>-->
+              <!--</span>-->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="">Description</label>
+      <textarea class="form-control" rows="6" data-ng-model="quiz.description"
+                placeholder="Enter description" disabled></textarea>
+          </div>
+
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" data-ng-model="quiz.hasButton" disabled> <span>Add 'Back' and 'Next' buttons</span>
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="">Tags</label>
+            <tags-input class="bootstrap"
+                        data-ng-model="quiz.tags"
+                        placeholder="Add a tag"
+                        add-on-blur="false"
+                        allow-leftover-text="false"
+                        replace-spaces-with-dashes="false">
+            </tags-input>
+          </div>
+
+          <!--<div class="form-group">-->
+          <!--<label for="">Start Page</label>-->
+
+          <!--<div>-->
+          <!--<select class="form-control"-->
+          <!--data-ng-model="quiz.startPage"-->
+          <!--data-ng-options="startPage._id as startPage.title for startPage in startPages">-->
+          <!--<option value="">Select Start Page</option>-->
+          <!--</select>-->
+          <!--&lt;!&ndash;<span class="ui-select">&ndash;&gt;-->
+          <!--&lt;!&ndash;<select&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-model="quiz.startPage"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-options="startPage._id as startPage.title for startPage in startPages"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-class="quiz.startPage == '' || !quiz.startPage ? 'text-muted' : 'text-info'">&ndash;&gt;-->
+          <!--&lt;!&ndash;<option value="">Select Start Page</option>&ndash;&gt;-->
+          <!--&lt;!&ndash;</select>&ndash;&gt;-->
+          <!--&lt;!&ndash;</span>&ndash;&gt;-->
+          <!--</div>-->
+          <!--</div>-->
+
+          <!--<div class="form-group">-->
+          <!--<label for="">Opt-In Form</label>-->
+
+          <!--<div>-->
+          <!--<select class="form-control"-->
+          <!--data-ng-model="quiz.form"-->
+          <!--data-ng-options="form._id as form.title for form in forms">-->
+          <!--<option value="">Select Opt-In Form</option>-->
+          <!--</select>-->
+          <!--&lt;!&ndash;<span class="ui-select">&ndash;&gt;-->
+          <!--&lt;!&ndash;<select&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-model="quiz.form"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-options="form._id as form.title for form in forms"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-ng-class="quiz.form == '' || !quiz.form ? 'text-muted' : 'text-info'">&ndash;&gt;-->
+          <!--&lt;!&ndash;<option value="">Select Opt-In Form</option>&ndash;&gt;-->
+          <!--&lt;!&ndash;</select>&ndash;&gt;-->
+          <!--&lt;!&ndash;</span>&ndash;&gt;-->
+          <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+
+      <div class="row top-buffer">
+        <div class="col-md-12">
+
+          <tabset vertical="false" type="pills">
+            <tab heading="Start Pages">
+              <div class="row top-buffer">
+                <div class="col-sm-4 col-xs-4">
+                  <form>
+                    <input type="text"
+                           placeholder="Search Start Pages"
+                           class="form-control"
+                           data-ng-model="keyword.searchStartPageKeywords"
+                           data-ng-keyup="search('startPage')">
+                  </form>
+                </div>
+              </div>
+              <div class="container-quiz">
+                <div ng-repeat="startPage in filteredStartPages" ng-drag="true" ng-drag-data="{{startPage}}"
+                     ng-style="questionRectStyle" class="startpage-rect">
+                  <div class="ellipsis" ng-style="ellipsisStyle">
+                    <div><p>{{startPage.name}}</p></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+
+            <tab heading="Q&A">
+              <div class="row top-buffer">
+                <div class="col-sm-4 col-xs-4">
+                  <form>
+                    <input type="text"
+                           placeholder="Search Q&As"
+                           class="form-control"
+                           data-ng-model="keyword.searchQuestionKeywords"
+                           data-ng-keyup="search('question')">
+                  </form>
+                </div>
+              </div>
+              <div class="container-quiz">
+                <div ng-repeat="question in filteredQuestions" ng-drag="true" ng-drag-data="{{question}}"
+                     ng-style="questionRectStyle" class="question-rect">
+                  <div class="ellipsis" ng-style="ellipsisStyle">
+                    <div><p>{{question.name}}</p></div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+
+            <tab heading="Opt-In Forms">
+              <div class="row top-buffer">
+                <div class="col-sm-4 col-xs-4">
+                  <form>
+                    <input type="text"
+                           placeholder="Search Forms"
+                           class="form-control"
+                           data-ng-model="keyword.searchFormKeywords"
+                           data-ng-keyup="search('form')">
+                  </form>
+                </div>
+              </div>
+              <div class="container-quiz">
+                <div ng-repeat="form in filteredForms" style="display: inline-block; position: relative;">
+                  <div ng-drag="true" ng-drag-data="{{form}}"
+                       ng-style="questionRectStyle" class="form-rect" ng-mousedown="onDragStart(form)"
+                       ng-mouseup="onDragEnd(form)">
+                    <div class="ellipsis" ng-style="ellipsisStyle">
+                      <div>
+                        <p>{{form.name}}</p>
+
+                        <!--<p ng-if="form.meta.dragging" ng-style="espListLabelStyle">{{form.meta.exitUrl}}</p>-->
+                      </div>
+                    </div>
+                  </div>
+                  <div ng-style="espExitUrlStyle" ng-show="!form.meta.dragging">
+                    <span class="glyphicon glyphicon-link" data-ng-click="setExitUrl(form, 'form')"
+                          tooltip="Exit URL" ng-class="{'icon-green': form.meta.exitUrl}"
+                          style="cursor: pointer;"></span>
+                  </div>
+                </div>
+              </div>
+            </tab>
+
+            <tab heading="ESP">
+              <div class="row top-buffer">
+                <div class="col-sm-4 col-xs-4">
+                  <form>
+                    <input type="text"
+                           placeholder="Search ESP"
+                           class="form-control"
+                           data-ng-model="keyword.searchEspKeywords"
+                           data-ng-keyup="search('result')">
+                  </form>
+                </div>
+              </div>
+              <div class="container-quiz">
+                <div ng-repeat="esp in filteredEsps" style="display: inline-block; position: relative;">
+                  <div ng-drag="true" ng-drag-data="{{esp}}"
+                       ng-style="questionRectStyle" class="esp-rect" ng-mousedown="onDragStart(esp)"
+                       ng-mouseup="onDragEnd(esp)">
+                    <div class="ellipsis" ng-style="ellipsisStyle">
+                      <div>
+                        <p>{{esp.name}}</p>
+
+                        <p ng-if="esp.meta.dragging" ng-style="espListLabelStyle">{{esp.meta.list.listName}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <select class="form-control"
+                          data-ng-model="esp.meta.list"
+                          data-ng-options="list as list.listName for list in esp.meta.lists"
+                          ng-style="espListSelectStyle"
+                          ng-show="!esp.meta.dragging"
+                    >
+                    <option value="" disabled>Select List</option>
+                  </select>
+                </div>
+              </div>
+            </tab>
+
+            <tab heading="Results Pages">
+              <div class="row top-buffer">
+                <div class="col-sm-4 col-xs-4">
+                  <form>
+                    <input type="text"
+                           placeholder="Search Results Pages"
+                           class="form-control"
+                           data-ng-model="keyword.searchResultsPageKeywords"
+                           data-ng-keyup="search('resultsPage')">
+                  </form>
+                </div>
+              </div>
+              <div class="container-quiz">
+                <div ng-repeat="resultsPage in filteredResultsPages" style="display: inline-block; position: relative;">
+                  <div ng-drag="true" ng-drag-data="{{resultsPage}}"
+                       ng-style="questionRectStyle" class="result-rect" ng-mousedown="onDragStart(resultsPage)"
+                       ng-mouseup="onDragEnd(resultsPage)">
+                    <div class="ellipsis" ng-style="ellipsisStyle">
+                      <div>
+                        <p>{{resultsPage.name}}</p>
+
+                        <p ng-if="resultsPage.meta.dragging" ng-style="espListLabelStyle">
+                          {{resultsPage.meta.exitUrl}}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div ng-style="espExitUrlStyle" ng-show="!resultsPage.meta.dragging">
+                    <span class="glyphicon glyphicon-link" data-ng-click="setExitUrl(resultsPage, 'resultsPage')"
+                          tooltip="Exit URL" ng-class="{'icon-green': resultsPage.meta.exitUrl}"
+                          style="cursor: pointer;"></span>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+
+        </div>
+      </div>
+
+      <!--<div class="row top-buffer">-->
+      <!--<div class="col-lg-6">-->
+      <!--<label for="">Q&A</label>-->
+
+      <!--<div class="row">-->
+      <!--<div class="col-sm-4 col-xs-4">-->
+      <!--<form>-->
+      <!--<input type="text"-->
+      <!--placeholder="Search Q&As"-->
+      <!--class="form-control"-->
+      <!--data-ng-model="searchQuestionKeywords"-->
+      <!--data-ng-keyup="search('question')">-->
+      <!--</form>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="container-quiz">-->
+      <!--<div ng-repeat="question in filteredQuestions" ng-drag="true" ng-drag-data="{{question}}"-->
+      <!--ng-style="questionRectStyle" class="question-rect">-->
+      <!--<div class="ellipsis" ng-style="ellipsisStyle">-->
+      <!--<div><p>{{question.name}}</p></div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-lg-6">-->
+      <!--<label for="">Result</label>-->
+
+      <!--<div class="row">-->
+      <!--<div class="col-sm-4 col-xs-4">-->
+      <!--<form>-->
+      <!--<input type="text"-->
+      <!--placeholder="Search Results"-->
+      <!--class="form-control"-->
+      <!--data-ng-model="searchResultKeywords"-->
+      <!--data-ng-keyup="search('result')">-->
+      <!--</form>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--<div class="container-quiz">-->
+      <!--<div ng-repeat="result in filteredResults" ng-drag="true" ng-drag-data="{{result}}"-->
+      <!--ng-style="questionRectStyle" class="result-rect">-->
+      <!--<div class="ellipsis" ng-style="ellipsisStyle">-->
+      <!--<div><p>{{result.name}}</p></div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+
+      <div class="row top-buffer">
+        <div ng-drop="true" ng-drop-success="onDropComplete($data,$event)" class="col-lg-12 quiz-map" id="quiz-map"
+             tabindex="1" ng-keydown="keyDown($event)" ng-keyup="keyUp($event)" ng-click="selectQuizMap()"
+             mouse-capture>
+          <quiz-map
+            id="container-map"
+            class="container-map"
+            chart="chartViewModel"
+            >
+          </quiz-map>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

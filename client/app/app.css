@@ -1,0 +1,159 @@
+/**
+ * Bootstrap Fonts
+ */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../bower_components/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/**
+ *Font Awesome Fonts
+ */
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'),
+  url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/**
+ * Form-validation Styles
+ */
+
+.form-validation .ng-invalid.ng-dirty {
+  border-color: #ff7857 !important;
+}
+
+.form-validation .ng-valid.ng-dirty {
+  border-color: #a3c86d !important;
+}
+
+.lead-collection-logo {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.lead-collection-logo img {
+  width: 400px;
+  height: 80px;
+}
+
+.green-overlay {
+  background-image: url('/assets/images/green_tick.png');
+  background-size:   70px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.nav-submenu a {
+  padding: 15px 30px;
+}
+
+/**
+ * switch
+ */
+.switch input {
+  display: none;
+}
+.switch i {
+  display: inline-block;
+  cursor: pointer;
+  padding-right: 25px;
+  transition: all ease 0.2s;
+  -webkit-transition: all ease 0.2s;
+  border-radius: 30px;
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5);
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5);
+}
+.switch i:before {
+  display: block;
+  content: '';
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background: white;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.5);
+  box-shadow: 0 1px 2px rgba(0,0,0,.5);
+}
+.switch :checked + i {
+  padding-right: 0;
+  padding-left: 25px;
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #674E9E;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #674E9E;
+}
+
+.switch.switch-success :checked + i {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #A3C86D;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #A3C86D;
+}
+
+.switch.switch-info :checked + i {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #7ACBEE;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #7ACBEE;
+}
+
+.switch.switch-warning :checked + i {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #FDD761;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #FDD761;
+}
+
+.switch.switch-danger :checked + i {
+  -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #FF7857;
+  box-shadow: inset 0 0 1px rgba(0,0,0,.5), inset 0 0 50px #FF7857;
+}
+
+.valign-middle {
+  vertical-align: -webkit-baseline-middle;
+}
+
+.icon-green {
+  cursor: pointer;
+  color: #49AD17;
+}
+
+.connection-status-btn {
+  position: absolute;
+  top: 2px;
+  float: left;
+  right: 2px;
+  padding: 5px 5px 5px;
+  cursor: pointer;
+  opacity: 1;
+  border-radius: 50%;
+  color: #ccc;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-image-upload {
+  margin-left: 10px !important;
+}

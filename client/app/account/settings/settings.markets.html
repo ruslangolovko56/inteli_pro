@@ -1,0 +1,79 @@
+<div class="panel panel-default" style="border-top: none; margin-top: 0px; border-radius: 0px;">
+  <div class="panel-body">
+
+    <section class="panel table-dynamic col-md-6">
+      <div class="page-header">
+        <h3>Markets <span style="float: right;"><button type="button" class="btn btn-primary" ng-click="add()">Add New</button></span> </h3>
+      </div>
+
+      <div class="table-responsive table-bordered" style="border: 1px solid #ddd;">
+        <table class="table table-responsive table-bordered">
+          <thead>
+          <tr>
+            <th>
+              <div class="th">
+                Market
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('name') "
+                                      data-ng-class="{active: row == 'name'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-name') "
+                                      data-ng-class="{active: row == '-name'}"></span>
+              </div>
+            </th>
+            <th>
+              <div class="th">
+                Actions
+              </div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr data-ng-repeat="market in markets" ng-class="{success:market.editable, danger:!market.editable && market.active, active:!market.editable && !market.active}" style="height: 52px;">
+            <td style="width: 60%; vertical-align: middle;">
+              <span ng-if="market.status!='edit'">{{market.name}}</span>
+              <span ng-if="market.status=='edit'">
+                <input type="text" ng-model="market.tempName" class="form-control"required />
+              </span>
+            </td>
+            <td class="icon-btns">
+              <span class="glyphicon glyphicon-pencil valign-middle" data-ng-click="edit(market)" tooltip="Edit" data-ng-if="market.editable && market.status!='edit'"></span>
+              <span class="glyphicon glyphicon-trash valign-middle" data-ng-click="delete(market)" tooltip="Delete" data-ng-if="market.editable && market.status!='edit'"></span>
+              <span class="glyphicon glyphicon-ok valign-middle" data-ng-click="save(market)" tooltip="Save" data-ng-if="market.editable && market.status=='edit'"></span>
+              <span class="glyphicon glyphicon-remove valign-middle" data-ng-click="cancel(market)" tooltip="Cancel" data-ng-if="market.editable && market.status=='edit'"></span>
+              <label class="switch valign-middle" data-ng-if="!market.editable" tooltip="{{displayTooltip(market)}}" style="margin-bottom: 0px;"><input type="checkbox" data-ng-model="market.active" data-ng-change="updateStatus(market)" checked><i></i></label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--<footer class="table-footer">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-6 page-num-info">-->
+                            <!--<span>-->
+                                <!--Show-->
+                                <!--<select data-ng-model="numPerPage"-->
+                                        <!--data-ng-options="num for num in numPerPageOpt"-->
+                                        <!--data-ng-change="onNumPerPageChange()">-->
+                                <!--</select>-->
+                                <!--questions per page-->
+                            <!--</span>-->
+          <!--</div>-->
+          <!--<div class="col-md-6 text-right pagination-container">-->
+            <!--<pagination class="pagination-sm"-->
+                        <!--ng-model="currentPage"-->
+                        <!--total-items="markets.length"-->
+                        <!--max-size="4"-->
+                        <!--ng-change="select(currentPage)"-->
+                        <!--items-per-page="numPerPage"-->
+                        <!--rotate="false"-->
+                        <!--boundary-links="true"></pagination>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</footer>-->
+
+    </section>
+
+  </div>
+</div>

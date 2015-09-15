@@ -1,0 +1,63 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Add Answer Cutom Fields</h4>
+</div>
+<div class="modal-body">
+  <div class="table-responsive" style="overflow-x: auto">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="th">
+            Custom Field
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Custom Field Name
+          </div>
+        </th>
+        <th ng-repeat="answer in formAnswer.answers track by $index">
+          <div class="th">
+            Answer {{$index + 1}}
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Action
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="field in formAnswer.answerFields">
+        <td>{{field.name}}</td>
+        <td>{{field.label}}</td>
+        <td ng-repeat="answer in formAnswer.answers track by $index">
+          <div ng-hide="field.editStatus">
+            {{answer.fields[field._id]}}
+          </div>
+          <div ng-show="field.editStatus">
+            <input type="text" class="form-control" ng-model="answer.editingFields[field._id]"/>
+          </div>
+        </td>
+        <td class="icon-btns">
+          <span class="glyphicon glyphicon-pencil" data-ng-click="edit(field)" tooltip="Edit" ng-hide="field.editStatus"></span>
+          <span class="glyphicon glyphicon-ok" data-ng-click="saveEdit(field)" tooltip="Ok" ng-show="field.editStatus"></span>
+          <span class="glyphicon glyphicon-remove" data-ng-click="cancelEdit(field)" tooltip="Cancel" ng-show="field.editStatus"></span>
+          <span class="glyphicon glyphicon-trash" data-ng-click="delete(field)" tooltip="Delete" ng-hide="field.editStatus"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-default" type="submit"
+          data-ng-click="add()" style="float: left;">Answer Custom Fields
+  </button>
+  <button class="btn btn-md btn-primary" type="submit" data-ng-disabled="!canSubmit()"
+          data-ng-click="save()">Save
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancel</button>
+</div>

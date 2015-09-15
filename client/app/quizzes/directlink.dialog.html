@@ -1,0 +1,19 @@
+<div class="modal-header dialog-header-confirm">
+    <button type="button" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Direct Link</h4>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <label for="">Use this link for any purpose. Copy the web link below to your users.</label>
+        <div class="col-sm-12">
+            <div class="input-group">
+                <input type="text" class="form-control" data-ng-model="directLink" readonly>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" clip-copy="getTextToCopy()">Copy</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+</div>

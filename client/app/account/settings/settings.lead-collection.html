@@ -1,0 +1,22 @@
+<div class="panel panel-default" style="border-top: none; margin-top: 0px; border-radius: 0px;">
+  <div class="panel-body">
+    <div class="alert alert-info" role="alert">
+      Click on your preferred email service provider and complete the authorization to automate your lead collection and
+      email marketing.
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-6" ng-repeat="esp in esps">
+        <div ng-class="{'thumbnail': true, 'lead-collection-logo': true}" style="position: relative; float:left;">
+          <div ng-class="{'green-overlay': isAuthenticated(esp)}"> </div>
+          <span class="glyphicon glyphicon-remove connection-status-btn" ng-class="{'on-image-btn-remove': isAuthenticated(esp)}" data-ng-click="!isAuthenticated(esp)||cancelConnection(esp)"
+                style="margin-right: 40px;" tooltip="Cancel connection" tooltip-animation="false"></span>
+          <span class="glyphicon glyphicon-th-list on-image-btn-remove" data-ng-click="mapFields(esp)"
+                style="margin-right: 20px;" tooltip="Map fields" tooltip-animation="false"></span>
+          <span class="glyphicon glyphicon-transfer on-image-btn-remove" data-ng-click="setConnection(esp)" tooltip="Set connection" tooltip-animation="false"></span>
+          <img ng-src="{{esp.logo}}" alt="{{esp.name}}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

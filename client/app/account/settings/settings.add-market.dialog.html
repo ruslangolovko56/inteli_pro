@@ -1,0 +1,26 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Enter market name</h4>
+</div>
+<div class="modal-body" style="padding-bottom:0px;">
+
+  <form class="form form-validation" name="form_market" novalidate>
+
+    <div class="form-group" ng-class="{ 'has-success': form_field.name.$valid && submitted,
+                                            'has-error': form_field.name.$invalid && submitted }">
+      <input type="text" name="name" class="form-control" data-ng-model="form.name" required mongoose-error="">
+
+      <p class="help-block" ng-show="form_field.name.$error.mongoose">
+        {{ errors.name }}
+      </p>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" type="submit" data-ng-disabled="!canSubmit(form_market)"
+          data-ng-click="add(form_market)">Add
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancel</button>
+</div>

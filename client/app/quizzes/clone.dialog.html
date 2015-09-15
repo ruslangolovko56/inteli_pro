@@ -1,0 +1,18 @@
+<div class="modal-header dialog-header-confirm">
+    <button type="button" class="close" ng-click="cancel()">&times;</button>
+    <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Clone Quiz</h4>
+</div>
+<div class="modal-body">
+    <form name="dlg.form_dlg" novalidate class="form-validation">
+    <div class="form-group">
+        <label for="">Enter new title:</label>
+        <div class="col-sm-12">
+            <input type="text" name="" id="" class="form-control" data-ng-model="dlg.title" required>
+        </div>
+    </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-ng-click="create()" data-ng-disabled="!canSubmit()">Create</button>
+    <button type="button" class="btn btn-primary" data-ng-click="cancel()">Cancel</button>
+</div>

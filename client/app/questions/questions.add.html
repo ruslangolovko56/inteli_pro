@@ -1,0 +1,139 @@
+<section class="panel panel-default">
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> {{editable ? 'Edit Question' : 'Add
+    New Question and Answers' }}</strong></div>
+  <div class="panel-body">
+    <form name="form_question" novalidate class="form-validation">
+      <h5>Question</h5>
+
+      <div class="container-question">
+        <div class="form-group">
+          <label for="">Type <span class="text-danger">*</span></label>
+
+          <div>
+            <select data-ng-model="question.type"
+                    data-ng-options="type.text for type in types"
+                    class="form-control"
+                    data-ng-change="changeType(question.type)"
+                    required>
+              <option value="" disabled>Select Type</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Tags</label>
+          <tags-input class="bootstrap"
+                      data-ng-model="question.tags"
+                      placeholder="Add a tag"
+                      add-on-blur="false"
+                      allow-leftover-text="true"
+                      replace-spaces-with-dashes="false">
+          </tags-input>
+        </div>
+        <div data-ng-file-drop="onFileSelect($files, $index, 'question')"
+             data-ng-file-drag-over-class="another-file-over-class"
+             class="well my-drop-zone drop-box"
+             data-ng-show="question.status!='uploaded'"
+          >
+          <div data-ng-show="question.status==''">
+            Drag and drop file here or <input type="file"
+                                              ng-file-select="onFileSelect($files, $index, 'question')"
+                                              class="input-file"
+                                              accept="image/*">
+          </div>
+          <div data-ng-show="question.status=='uploading'">
+            <div class="progress">
+              <progressbar class="progress-striped active"
+                           max="max"
+                           value="progress">
+                <span>{{progress}} / {{max}}</span>
+              </progressbar>
+            </div>
+          </div>
+        </div>
+        <div data-ng-show="question.status=='uploaded'"
+             class="text-center" style="display: table;">
+          <div style="width: auto; height: auto; position: relative; float:left; margin-bottom: 15px;">
+                        <span class="glyphicon glyphicon-remove-sign on-image-btn-remove"
+                              data-ng-click="deleteAttachment('question')"></span>
+            <img data-ng-src="{{question.attachment.location}}"
+                 class="img-thumbnail img-responsive"
+                 style="max-height: 100px;">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="">Question <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter question" ng-model="question.text"
+                 required>
+        </div>
+      </div>
+
+      <div ng-if="question.type.id == 1">
+
+        <h5>Answers</h5>
+
+        <div class="container-answer" data-ng-repeat="answer in answers">
+          <button type="button" class="close" data-ng-click="close($index)">×</button>
+          <input type="checkbox" data-ng-model="answer.enable">Show on Question
+          <div data-ng-file-drop="onFileSelect($files, $index, 'answer')"
+               data-ng-file-drag-over-class="another-file-over-class"
+               class="well my-drop-zone drop-box"
+               style="margin-top: 25px;"
+               data-ng-show="answer.status!='uploaded'">
+            <div data-ng-show="answer.status==''">
+              Drag and drop file here or <input type="file"
+                                                ng-file-select="onFileSelect($files, $index, 'answer')"
+                                                class="input-file"
+                                                accept="image/*">
+            </div>
+            <div data-ng-show="answer.status=='uploading'">
+              <div class="progress">
+                <progressbar class="progress-striped active"
+                             max="max"
+                             value="progress">
+                  <span>{{progress}} / {{max}}</span>
+                </progressbar>
+              </div>
+            </div>
+          </div>
+          <div data-ng-show="answer.status=='uploaded'"
+               class="text-center" style="display: table;">
+            <div style="width: auto; height: auto; position: relative; float:left; margin-bottom: 15px;">
+                        <span class="glyphicon glyphicon-remove-sign on-image-btn-remove"
+                              data-ng-click="deleteAttachment('answer', $index)"></span>
+              <img data-ng-src="{{answer.attachment.location}}"
+                   class="img-thumbnail img-responsive"
+                   style="max-height: 100px;">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Answer {{$index + 1}} <span class="text-danger">*</span></label>
+            <input type="text"
+                   class="form-control"
+                   placeholder="Enter answer"
+                   data-ng-model="answer.text"
+                   required>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-default btn-xs" data-ng-click="addAnswer()">Add another answer</button>
+
+      </div>
+
+      <div class="text-right" style="margin-top: 5px">
+        <button type="button" class="btn btn-default" data-ng-click="addFields()">Add Answer Custom Fields
+        </button>
+        <button type="button" class="btn btn-primary" data-ng-click="addNew()" style="margin-right: 20px"
+                data-ng-hide="editable">Add another question
+        </button>
+        <button type="submit" class="btn btn-success" data-ng-click="save()" data-ng-disabled="!canSubmit()">
+          Save
+        </button>
+        <button type="button" class="btn btn-warning" data-ng-click="cancel()">Cancel</button>
+      </div>
+
+      <div class="callout callout-info">
+        <p>Save button will be active only when all necessary fields are valid.</p>
+      </div>
+    </form>
+  </div>
+</section>

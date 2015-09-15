@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)http://fiddle.jshell.net/_display/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Smoothed Line Chart - jsFiddle demo</title>
+  
+  <script type="text/javascript" src="dummy.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="normalize(1).css">
+  
+  
+  <link rel="stylesheet" type="text/css" href="result-light.css">
+  
+  <style type="text/css">
+    #chartdiv {
+	width	: 100%;
+	height	: 500px;
+    background-color: #999999;
+}			
+  </style>
+  
+</head>
+<body>
+  <script type="text/javascript" src="amcharts.js"></script>
+<script type="text/javascript" src="serial.js"></script>
+<script type="text/javascript" src="none.js"></script>
+<div id="chartdiv" style="overflow: hidden; text-align: left;"><div class="amcharts-main-div" style="position: relative;"><div class="amcharts-chart-div" style="overflow: hidden; position: relative; text-align: left; width: 593px; height: 452px; cursor: default;"><svg version="1.1" style="position: absolute; width: 593px; height: 452px;"><g><path cs="100,100" d="M0.5,0.5 L592.5,0.5 L592.5,451.5 L0.5,451.5 Z" fill="#475959" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0"></path><path cs="100,100" d="M0.5,0.5 L490.5,0.5 L490.5,396.5 L0.5,396.5 L0.5,0.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0" transform="translate(82,20)"></path></g><g><g transform="translate(82,20)"></g><g transform="translate(82,20)" visibility="visible"><g><rect x="0.5" y="0.5" width="490" height="396" rx="0" ry="0" stroke-width="0" fill="#455657" stroke="#455657" fill-opacity="0.8" stroke-opacity="0.8" transform="translate(0,0)"></rect></g></g></g><g></g><g></g><g></g><g></g><g><g transform="translate(82,20)"><g></g><g clip-path="url(#AmChartsEl-4)"><path cs="100,100" d="M82,28 Q102,44,123,78 Q143,112,164,150 Q184,189,204,225 Q225,262,245,283 Q265,304,286,318 Q306,332,327,341 Q347,351,367,357 Q388,363,408,368M0,0 L0,0" fill="#b858c9" fill-opacity="0" stroke-width="2" stroke-opacity="1" stroke="#637bb6"></path></g><g clip-path="url(#AmChartsEl-3)"><path cs="100,100" d="M82,28 Q102,44,123,78 Q143,112,164,150 Q184,189,204,225 Q225,262,245,283 Q265,304,286,318 Q306,332,327,341 Q347,351,367,357 Q388,363,408,368M0,0 L0,0" fill="#b858c9" fill-opacity="0" stroke-width="2" stroke-opacity="1" stroke="#b858c9"></path></g><clippath id="AmChartsEl-3"><rect x="0" y="0" width="491" height="397" rx="0" ry="0" stroke-width="0"></rect></clippath><clippath id="AmChartsEl-4"><rect x="0" y="20" width="491" height="1" rx="0" ry="0" stroke-width="0"></rect></clippath></g></g><g clip-path="url(#AmChartsEl-2)"></g><g><g><path cs="100,100" d="M0.5,0.5 L490.5,0.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#fefefe" transform="translate(82,416)"></path></g><g><path cs="100,100" d="M0.5,0.5 L0.5,396.5" fill="none" stroke-width="1" stroke-opacity="0" stroke="#000000" transform="translate(82,20)" visibility="visible"></path></g></g><g><g transform="translate(82,20)" visibility="hidden"><path cs="100,100" d="M0.5,0.5 L0.5,0.5 L0.5,396.5" fill="none" stroke-width="1" stroke-opacity="1" stroke="#CC0000" visibility="hidden"></path></g></g><g></g><g><g transform="translate(82,20)"><circle r="5" cx="0" cy="0" fill="#b858c9" stroke="#b858c9" fill-opacity="1" stroke-width="2" stroke-opacity="0" transform="translate(82,28)"></circle><circle r="5" cx="0" cy="0" fill="#b858c9" stroke="#b858c9" fill-opacity="1" stroke-width="2" stroke-opacity="0" transform="translate(245,283)"></circle><circle r="5" cx="0" cy="0" fill="#b858c9" stroke="#b858c9" fill-opacity="1" stroke-width="2" stroke-opacity="0" transform="translate(408,368)"></circle></g></g><g><g transform="translate(82,20)"><text y="6" fill="#fefefe" font-family="Verdana" font-size="12" opacity="1" font-weight="bold" text-anchor="middle" transform="translate(245,413)"><tspan y="6" x="0" style="font-size: 12px;">Time(days)</tspan></text></g><g transform="translate(82,20)" visibility="visible"><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,-2)"><tspan y="6" x="0" style="font-size: 11px;">2,200</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,55)"><tspan y="6" x="0" style="font-size: 11px;">2,400</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,111)"><tspan y="6" x="0" style="font-size: 11px;">2,600</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,168)"><tspan y="6" x="0" style="font-size: 11px;">2,800</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,224)"><tspan y="6" x="0" style="font-size: 11px;">3,000</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,281)"><tspan y="6" x="0" style="font-size: 11px;">3,200</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,337)"><tspan y="6" x="0" style="font-size: 11px;">3,400</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="end" transform="translate(-12,394)"><tspan y="6" x="0" style="font-size: 11px;">3,600</tspan></text><text y="6" fill="#fefefe" font-family="Verdana" font-size="12" opacity="1" font-weight="bold" text-anchor="middle" transform="translate(-61,198) rotate(-90)"><tspan y="6" x="0" style="font-size: 12px;">Depth</tspan></text></g></g><g><g></g></g><g></g><g><g transform="translate(491,28)" visibility="hidden"><rect x="0.5" y="0.5" width="90" height="31" rx="0" ry="0" stroke-width="1" fill="#e5e5e5" stroke="#e5e5e5" fill-opacity="1" stroke-opacity="1" opacity="0" transform="translate(-8,-8)"></rect><image x="0" y="0" width="17" height="17" xlink:href="http://www.amcharts.com/lib/3/images/lens.png"></image><text y="6" fill="#000000" font-family="Verdana" font-size="11" opacity="1" text-anchor="start" transform="translate(22,6)"><tspan y="6" x="0" style="font-size: 11px;">Show all</tspan></text></g></g><g></g><clippath id="AmChartsEl-2"><rect x="82" y="20" width="490" height="396" rx="0" ry="0" stroke-width="0"></rect></clippath></svg><a href="http://www.amcharts.com/javascript-charts/" title="JavaScript charts" style="position: absolute; text-decoration: none; color: rgb(0, 0, 0); font-family: Verdana; font-size: 11px; opacity: 0.7; display: block; left: 87px; top: 25px;">JS chart by amCharts</a></div><div class="amChartsLegend amcharts-legend-div" style="overflow: hidden; position: relative; text-align: left; width: 593px; height: 48px; cursor: default;"><svg version="1.1" style="position: absolute; width: 593px; height: 48px;"><g transform="translate(82,0)"><path cs="100,100" d="M0.5,0.5 L490.5,0.5 L490.5,37.5 L0.5,37.5 Z" fill="#FFFFFF" stroke="#000000" fill-opacity="0" stroke-width="1" stroke-opacity="0"></path><g transform="translate(364,11)"><g cursor="pointer" transform="translate(0,0)"><circle r="4" cx="0" cy="0" fill="#b858c9" stroke="#b858c9" fill-opacity="1" stroke-width="1" stroke-opacity="1" transform="translate(4,9)"></circle><g transform="translate(4,4)" visibility="hidden"><path cs="100,100" d="M-1.5,-1.5 L2.5,2.5" fill="none" stroke="#FFFFFF" stroke-width="3"></path><path cs="100,100" d="M-1.5,2.5 L2.5,-1.5" fill="none" stroke="#FFFFFF" stroke-width="3"></path></g><text y="6" fill="#fefefe" font-family="Verdana" font-size="11" opacity="1" text-anchor="start" transform="translate(26,8)">Current Well</text><rect x="8" y="0" width="118" height="18" rx="0" ry="0" stroke-width="0" stroke="none" fill="#fff" fill-opacity="0.005"></rect></g></g></g></svg></div></div></div>							
+  
+
+
+<script type="text/javascript">//<![CDATA[ 
+
+var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "none",
+        "pathToImages": "http://www.amcharts.com/lib/3/images/",
+        "backgroundColor": "#475959",
+        "backgroundAlpha": 0,
+        "marginLeft": 30,
+        "marginBottom": 60,
+        "legend": {
+            "align": "right",
+            "position": "bottom",
+            "markerType": "circle",
+            "markerSize": 8,
+            "equalWidths": false,
+            "fontSize": 11,
+            "periodValueText": "Current Well",
+            "valueAlign": "left",
+            "valueWidth": 100,
+            "color": "#fefefe"
+        },
+        "dataProvider": [{
+            "year": "1",
+            "value": 2300
+        }, {
+            "year": "2",
+            "value": 3200
+        }, {
+            "year": "3",
+            "value": 3500
+        }],
+        "valueAxes": [{
+            "axisAlpha": 0,
+            "position": "left",
+            "reversed": true,
+            "title": "Depth",
+            "gridAlpha": 0,
+            "color": "#fefefe",
+            "titleColor": "#fefefe",
+            "guides": [{
+                "fillAlpha": 0.8,
+                "fillColor": "#455657",
+                "inside": true,
+                "lineAlpha": 0,
+                "toValue": 40000,
+                "value": 0
+            }],
+        }],
+        "graphs": [{
+            "balloonText": "[[category]]<br><b><span style='font-size:14px;'>[[value]]</span></b>",
+            "lineColor": "#b858c9",
+            "lineThickness": 2,
+            "negativeLineColor": "#637bb6",
+            "type": "smoothedLine",
+            "valueField": "value",
+            "bullet": "round",
+            "bulletSize": 10,
+        }],
+        "chartCursor": {
+           
+        },
+        "categoryField": "year",
+        "categoryAxis": {
+            "parseDates": false,
+            "minorGridAlpha": 0,
+            "minorGridEnabled": true,
+            "title": "Time(days)",
+            "color": "#fefefe",
+            "titleColor": "#fefefe",
+            "axisColor": "#fefefe",
+            "axisAlpha": 0,
+            "gridAlpha": 0,
+            "gridColor": "#fefefe",
+            "labelsEnabled": false
+        }
+    });
+//]]>  
+
+</script>
+
+
+
+
+
+
+
+</body></html>

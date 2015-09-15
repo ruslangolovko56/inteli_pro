@@ -1,0 +1,253 @@
+*{
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+[ng-drag]{
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.question-rect{
+    background: #F799E4;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    margin:0 10px;
+    cursor: move;
+    border:solid 2px #333;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: normal;
+}
+.result-rect{
+    background: #F2DEDE;
+    color: black;
+    text-align: center;
+    display: inline-block;
+    margin:0 10px;
+    cursor: move;
+    border:solid 2px #333;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: normal;
+}
+.esp-rect{
+  background: #FCF8E3;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  margin:0 10px;
+  cursor: move;
+  border:solid 2px #333;
+  font-size: 12px;
+  border-radius: 10px;
+  white-space: normal;
+}
+.startpage-rect{
+  background: #D9EDF7;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  margin:0 10px;
+  cursor: move;
+  border:solid 2px #333;
+  font-size: 12px;
+  border-radius: 10px;
+  white-space: normal;
+}
+.form-rect{
+  background: #DFF0D8;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  margin:0 10px;
+  cursor: move;
+  border:solid 2px #333;
+  font-size: 12px;
+  border-radius: 10px;
+  white-space: normal;
+}
+[ng-drag].drag-over{
+    border:solid 3px rgb(241, 196, 15);
+    background: rgb(241, 196, 15);
+}
+[ng-drag].dragging{
+    opacity: 0.5;
+}
+[ng-drag].drag-over .ellipsis:after {
+    background: -webkit-gradient(linear, left top, right top,
+    from(rgba(241, 196, 15, 0)), to(rgb(241, 196, 15)), color-stop(50%, rgb(241, 196, 15)));
+    background: -moz-linear-gradient(to right, rgba(241, 196, 15, 0), rgb(241, 196, 15) 50%, rgb(241, 196, 15));
+    background: -o-linear-gradient(to right, rgba(241, 196, 15, 0), rgb(241, 196, 15) 50%, rgb(241, 196, 15));
+    background: -ms-linear-gradient(to right, rgba(241, 196, 15, 0), rgb(241, 196, 15) 50%, rgb(241, 196, 15));
+    background: linear-gradient(to right, rgba(241, 196, 15, 0), rgb(241, 196, 15) 50%, rgb(241, 196, 15));
+}
+
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+
+.container-quiz {
+    height: auto;
+    border: 1px solid #ddd;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    margin-top:10px;
+    min-height: 122px;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+.bottom-buffer {
+    margin-bottom: 20px;
+}
+
+.quiz-map {
+    overflow:auto;
+    height: 700px;
+}
+
+.quiz-map:focus {
+    outline: none;
+}
+
+.container-map {
+    width: 1100px;
+    min-height: 690px;
+    height: 690px;
+}
+
+.ellipsis {
+    overflow: hidden;
+    margin: 10px 14px 10px 10px;
+    line-height: 20px;
+}
+
+.ellipsis > *:first-child {
+    float: right;
+    width: 100%;
+    margin-left: -5px;
+}
+
+.question-rect .ellipsis:after {
+    content: "\02026";
+
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+
+    float: right; position: relative;
+    top: -20px; left: 100%;
+    width: 3em; margin-left: -3em;
+    padding-right: 5px;
+
+    text-align: right;
+
+    background: -webkit-gradient(linear, left top, right top,
+    from(rgba(247, 153, 228, 0)), to(RGB(247, 153, 228)), color-stop(50%, RGB(247, 153, 228)));
+    background: -moz-linear-gradient(to right, rgba(247, 153, 228, 0), RGB(247, 153, 228) 50%, RGB(247, 153, 228));
+    background: -o-linear-gradient(to right, rgba(247, 153, 228, 0), RGB(247, 153, 228) 50%, RGB(247, 153, 228));
+    background: -ms-linear-gradient(to right, rgba(247, 153, 228, 0), RGB(247, 153, 228) 50%, RGB(247, 153, 228));
+    background: linear-gradient(to right, rgba(247, 153, 228, 0), RGB(247, 153, 228) 50%, RGB(247, 153, 228));
+}
+
+.result-rect .ellipsis:after {
+    content: "\02026";
+
+    box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+
+    float: right; position: relative;
+    top: -20px; left: 100%;
+    width: 3em; margin-left: -3em;
+    padding-right: 5px;
+
+    text-align: right;
+
+    background: -webkit-gradient(linear, left top, right top,
+    from(rgba(242, 222, 222, 0)), to(RGB(242, 222, 222)), color-stop(50%, RGB(242, 222, 222)));
+    background: -moz-linear-gradient(to right, rgba(242, 222, 222, 0), RGB(242, 222, 222) 50%, RGB(242, 222, 222));
+    background: -o-linear-gradient(to right, rgba(242, 222, 222, 0), RGB(242, 222, 222) 50%, RGB(242, 222, 222));
+    background: -ms-linear-gradient(to right, rgba(242, 222, 222, 0), RGB(242, 222, 222) 50%, RGB(242, 222, 222));
+    background: linear-gradient(to right, rgba(242, 222, 222, 0), RGB(242, 222, 222) 50%, RGB(242, 222, 222));
+}
+
+.esp-rect .ellipsis:after {
+  content: "\02026";
+
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+
+  float: right; position: relative;
+  top: -20px; left: 100%;
+  width: 3em; margin-left: -3em;
+  padding-right: 5px;
+
+  text-align: right;
+
+  background: -webkit-gradient(linear, left top, right top,
+  from(rgba(252, 248, 227, 0)), to(RGB(252, 248, 227)), color-stop(50%, RGB(252, 248, 227)));
+  background: -moz-linear-gradient(to right, rgba(252, 248, 227, 0), RGB(252, 248, 227) 50%, RGB(252, 248, 227));
+  background: -o-linear-gradient(to right, rgba(252, 248, 2272, 0), RGB(252, 248, 227) 50%, RGB(252, 248, 227));
+  background: -ms-linear-gradient(to right, rgba(252, 248, 227, 0), RGB(252, 248, 227) 50%, RGB(252, 248, 227));
+  background: linear-gradient(to right, rgba(252, 248, 227, 0), RGB(252, 248, 227) 50%, RGB(252, 248, 227));
+}
+
+
+.form-rect .ellipsis:after {
+  content: "\02026";
+
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+
+  float: right; position: relative;
+  top: -20px; left: 100%;
+  width: 3em; margin-left: -3em;
+  padding-right: 5px;
+
+  text-align: right;
+
+  background: -webkit-gradient(linear, left top, right top,
+  from(rgba(223, 240, 216, 0)), to(RGB(223, 240, 216)), color-stop(50%, RGB(223, 240, 216)));
+  background: -moz-linear-gradient(to right, rgba(223, 240, 216, 0), RGB(223, 240, 216) 50%, RGB(223, 240, 216));
+  background: -o-linear-gradient(to right, rgba(223, 240, 216, 0), RGB(223, 240, 216) 50%, RGB(223, 240, 216));
+  background: -ms-linear-gradient(to right, rgba(223, 240, 216, 0), RGB(223, 240, 216) 50%, RGB(223, 240, 216));
+  background: linear-gradient(to right, rgba(223, 240, 216, 0), RGB(223, 240, 216) 50%, RGB(223, 240, 216));
+}
+
+
+.startpage-rect .ellipsis:after {
+  content: "\02026";
+
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+
+  float: right; position: relative;
+  top: -20px; left: 100%;
+  width: 3em; margin-left: -3em;
+  padding-right: 5px;
+
+  text-align: right;
+
+  background: -webkit-gradient(linear, left top, right top,
+  from(rgba(217, 237, 247, 0)), to(RGB(217, 237, 247)), color-stop(50%, RGB(217, 237, 247)));
+  background: -moz-linear-gradient(to right, rgba(217, 237, 247, 0), RGB(217, 237, 247) 50%, RGB(217, 237, 247));
+  background: -o-linear-gradient(to right, rgba(217, 237, 247, 0), RGB(217, 237, 247) 50%, RGB(217, 237, 247));
+  background: -ms-linear-gradient(to right, rgba(217, 237, 247, 0), RGB(217, 237, 247) 50%, RGB(217, 237, 247));
+  background: linear-gradient(to right, rgba(217, 237, 247, 0), RGB(217, 237, 247) 50%, RGB(217, 237, 247));
+}
+s

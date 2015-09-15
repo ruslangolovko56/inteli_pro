@@ -1,0 +1,142 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel panel-default table-dynamic top-buffer">
+                <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Questions & Answers</strong></div>
+
+                <div class="table-filters">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form>
+                                <input type="text"
+                                       placeholder="Search Questions & Answers"
+                                       class="form-control"
+                                       data-ng-model="searchKeywords"
+                                       data-ng-keyup="search()">
+                            </form>
+                        </div>
+                        <div class="col-md-3 filter-result-info">
+                            <span>
+                                Showing {{filteredQuestions.length}}/{{questions.length}} questions
+                            </span>
+                        </div>
+                        <div class="col-md-5 text-right">
+                            <button type="button" class="btn btn-primary" ui-sref="questions.add">Add Qns+Ans</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive table-bordered">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th><div class="th">
+                                Question
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('text') "
+                                      data-ng-class="{active: row == 'text'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-text') "
+                                      data-ng-class="{active: row == '-text'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Type
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('type.text') "
+                                      data-ng-class="{active: row == 'type.text'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-type.text') "
+                                      data-ng-class="{active: row == '-type.text'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Tags
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('strTags') "
+                                      data-ng-class="{active: row == 'strTags'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-strTags') "
+                                      data-ng-class="{active: row == '-strTags'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Used
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('used') "
+                                      data-ng-class="{active: row == 'used'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-used') "
+                                      data-ng-class="{active: row == '-used'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Date created
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('created') "
+                                      data-ng-class="{active: row == 'created'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-created') "
+                                      data-ng-class="{active: row == '-created'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Action
+                            </div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="question in currentPageQuestions" data-ng-if="question.editable">
+                            <td style="max-width: 300px;">{{question.text}}</td>
+                            <td>{{question.type.text}}</td>
+                            <td>{{question.strTags}}</td>
+                            <td>{{printUsed(question.used)}}</td>
+                            <td>{{question.created|date:'dd MMM yyyy'}}</td>
+                            <td class="icon-btns">
+                                <span class="glyphicon glyphicon-file" data-ng-click="clone(question)" tooltip="Clone"></span>
+                                <span class="glyphicon glyphicon-pencil" ui-sref="questions.edit({id:question._id})" tooltip="Edit" data-ng-if="question.editable"></span>
+                                <span class="glyphicon glyphicon-pencil glyphicon-disabled" data-ng-if="!question.editable"></span>
+                                <span class="glyphicon glyphicon-trash" data-ng-click="delete(question)" tooltip="Delete" data-ng-if="question.editable"></span>
+                                <span class="glyphicon glyphicon-trash glyphicon-disabled" data-ng-if="!question.editable"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                Show
+                                <select data-ng-model="numPerPage"
+                                        data-ng-options="num for num in numPerPageOpt"
+                                        data-ng-change="onNumPerPageChange()">
+                                </select>
+                                questions per page
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination class="pagination-sm"
+                                        ng-model="currentPage"
+                                        total-items="filteredQuestions.length"
+                                        max-size="4"
+                                        ng-change="select(currentPage)"
+                                        items-per-page="numPerPage"
+                                        rotate="false"
+                                        boundary-links="true"></pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12" ui-view>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/navbar/navbar-bottom.html'"></div>

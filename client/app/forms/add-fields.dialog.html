@@ -1,0 +1,44 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Add Form Fields</h4>
+</div>
+<div class="modal-body">
+  <select
+    ng-model="form.selected"
+    ng-options="field as field.statusLabel for field in form.fields"
+    multiple
+    bs-duallistbox
+    bootstrap2="{{ settings.bootstrap2 }}"
+
+    move-on-select="{{ settings.moveOnSelect }}"
+    preserve-selection="{{ settings.preserveSelection }}"
+
+    move-selected-label="{{ settings.moveSelectedLabel }}"
+    move-all-label="{{ settings.moveAllLabel }}"
+    remove-selected-label="{{ settings.removeSelectedLabel }}"
+    remove-all-label="{{ settings.removeAllLabel }}"
+
+    non-selected-list-label="{{ settings.nonSelectedListLabel }}"
+    selected-list-label="{{ settings.selectedListLabel }}"
+
+    postfix="{{ settings.postfix }}"
+    select-min-height="{{ settings.selectMinHeight }}"
+
+    filter="{{ settings.filter }}"
+    filter-values="{{ settings.filterValues }}"
+    filter-non-selected="settings.filterNonSelected"
+    filter-selected="settings.filterSelected"
+    filter-placeholder="{{ settings.filterPlaceholder }}"
+    filter-clear="{{ settings.filterClear }}"
+    info-all="{{ settings.infoAll }}"
+    info-filtered="{{ settings.infoFiltered }}"
+    info-empty="{{ settings.infoEmpty }}"
+    >
+
+  </select>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="add()">Add</button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
+</div>
+

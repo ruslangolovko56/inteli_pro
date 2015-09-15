@@ -1,0 +1,107 @@
+<section class="panel table-dynamic">
+  <div class="page-header" style="margin-top: 20px;">
+    <h3>Answer Custom Fields <span style="float: right;"><button type="button" class="btn btn-primary" ng-click="add()">Add
+      Answer Custom Field
+    </button></span></h3>
+  </div>
+
+  <div class="table-responsive table-bordered" style="border: 1px solid #ddd;">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="th">
+            Custom Field
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('name') "
+      data-ng-class="{active: rowCustom == 'name'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-name') "
+      data-ng-class="{active: rowCustom == '-name'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Custom Field Label
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('label') "
+      data-ng-class="{active: rowCustom == 'type.label'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-label') "
+      data-ng-class="{active: rowCustom == '-type.label'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Field Type
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('type') "
+      data-ng-class="{active: rowCustom == 'type'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-type') "
+      data-ng-class="{active: rowCustom == '-type'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Required
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('required') "
+      data-ng-class="{active: rowCustom == 'required'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-required') "
+      data-ng-class="{active: rowCustom == '-required'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Visible/Hidden
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('visible') "
+      data-ng-class="{active: rowCustom == 'visible'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-visible') "
+      data-ng-class="{active: rowCustom == '-visible'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Date created
+<span class="glyphicon glyphicon-chevron-up"
+      data-ng-click=" orderCustomFields('created') "
+      data-ng-class="{active: rowCustom == 'created'}"></span>
+<span class="glyphicon glyphicon-chevron-down"
+      data-ng-click=" orderCustomFields('-created') "
+      data-ng-class="{active: rowCustom == '-created'}"></span>
+          </div>
+        </th>
+        <th>
+          <div class="th">
+            Actions
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="field in answerFields">
+        <td style="max-width: 300px;">{{field.name}}</td>
+        <td>{{field.label}}</td>
+        <td>{{field.type}}</td>
+        <td>{{field.required}}</td>
+        <td>{{field.visible}}</td>
+        <td>{{field.created|date:'dd MMM yyyy'}}</td>
+        <td class="icon-btns">
+          <span class="glyphicon glyphicon-pencil" data-ng-click="edit(field)" tooltip="Edit"
+                data-ng-if="isEditable(field)"></span>
+          <span class="glyphicon glyphicon-pencil glyphicon-disabled" tooltip="Edit"
+                data-ng-if="!isEditable(field)"></span>
+          <span class="glyphicon glyphicon-trash" data-ng-click="delete(field)" tooltip="Delete"
+                data-ng-if="isRemovable(field)"></span>
+          <span class="glyphicon glyphicon-trash glyphicon-disabled" tooltip="Delete"
+                data-ng-if="!isRemovable(field)"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

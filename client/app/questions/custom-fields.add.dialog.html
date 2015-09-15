@@ -1,0 +1,66 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Answer Cutom Fields</h4>
+</div>
+<div class="modal-body" style="padding-bottom:0px;" ng-if="formCustom.answerFields.length">
+  <div class="row">
+    <div class="col-md-6">
+      <form>
+        <input type="text"
+               placeholder="Search Custom Fields"
+               class="form-control"
+               data-ng-model="formCustom.searchKeywords"
+               data-ng-keyup="search()">
+      </form>
+    </div>
+  </div>
+  <div class="row top-buffer">
+    <div class="col-md-12">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>
+            <div class="th">
+              Select
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Custom Field
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Custom Field Name
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Creation Date
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="field in formCustom.filteredAnswerFields">
+          <td>
+            <input type="checkbox" ng-model="field.isSelected"/>
+          </td>
+          <td>{{field.name}}</td>
+          <td>{{field.label}}</td>
+          <td>{{field.created|date:'dd MMM yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal-body" style="padding-bottom:0px;" ng-if="!formCustom.answerFields.length">
+  <alert type="warning">No custom fields</alert>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-primary" type="submit" data-ng-disabled="!canSubmit()"
+          data-ng-click="add()">Add
+  </button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancel</button>
+</div>

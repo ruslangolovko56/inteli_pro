@@ -1,0 +1,109 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Add Fields</h4>
+</div>
+<div class="modal-body">
+  <section class="panel panel-default table-dynamic top-buffer">
+    <div class="table-filters">
+      <div class="row">
+        <div class="col-md-4 search-section">
+          <form>
+            <input type="text"
+                   placeholder="Search Fields"
+                   class="form-control"
+                   data-ng-model="form.searchKeywords"
+                   data-ng-keyup="search()">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="insert-field">
+      <span>Please select the form field and press 'Insert Field'</span>
+      <button type="button" class="btn btn-default insert-btn" data-ng-click="add()" data-ng-disabled="!canSubmit()">Insert Field</button>
+    </div>
+    <div style="clear: both; "></div>
+    <div class="table-responsive table-bordered">
+      <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>
+            <div class="th">
+              Field Name
+              <span class="glyphicon glyphicon-chevron-up"
+                    data-ng-click=" orderFields('name') "
+                    data-ng-class="{active: rowSystem == 'name'}"></span>
+              <span class="glyphicon glyphicon-chevron-down"
+                  data-ng-click=" orderFields('-name') "
+                  data-ng-class="{active: rowSystem == '-name'}"></span>
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Field Label
+              <span class="glyphicon glyphicon-chevron-up"
+                    data-ng-click=" orderFields('label') "
+                    data-ng-class="{active: rowSystem == 'label'}"></span>
+              <span class="glyphicon glyphicon-chevron-down"
+                    data-ng-click=" orderFields('-label') "
+                    data-ng-class="{active: rowSystem == '-label'}"></span>
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Type
+            </div>
+          </th>
+          <th>
+            <div class="th">
+              Category
+              <span class="glyphicon glyphicon-chevron-up"
+                    data-ng-click=" orderFields('category') "
+                    data-ng-class="{active: rowSystem == 'category'}"></span>
+              <span class="glyphicon glyphicon-chevron-down"
+                    data-ng-click=" orderFields('-category') "
+                    data-ng-class="{active: rowSystem == '-category'}"></span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="field in form.currentPageFields" ng-click="selectRow(field)" ng-class="selectedRowClass(field)" style="cursor: pointer;">
+          <td style="max-width: 300px;">{{field.name}}</td>
+          <td>{{field.label}}</td>
+          <td>{{field.type}}</td>
+          <td>{{field.category}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="table-footer">
+      <div class="row">
+        <div class="col-md-6 page-num-info">
+                            <span>
+                                Show
+                                <select data-ng-model="form.numPerPage"
+                                        data-ng-options="num for num in form.numPerPageOpt"
+                                        data-ng-change="onNumPerPageChange()">
+                                </select>
+                                fields per page
+                            </span>
+        </div>
+        <div class="col-md-6 text-right pagination-container">
+          <pagination class="pagination-sm"
+                      ng-model="form.currentPage"
+                      total-items="form.filteredFields.length"
+                      max-size="4"
+                      ng-change="select(form.currentPage)"
+                      items-per-page="form.numPerPage"
+                      rotate="false"
+                      boundary-links="true"></pagination>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+<div class="modal-footer">
+
+  <button type="button" class="btn btn-primary" data-ng-click="cancel()">Cancel</button>
+</div>

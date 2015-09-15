@@ -1,0 +1,67 @@
+<div class="container survey-container" em-height-source>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 well well-lg" ng-show="isStep(4)">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2>{{resultsPage.name}}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h5>{{resultsPage.description}}</h5>
+        </div>
+      </div>
+      <div class="row" ng-if="resultsPage.beforeResults">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body" ng-bind-html="resultsPage.beforeResults">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-repeat="result in resultsPage.results">
+        <div class="col-md-12 text-center">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>{{result.title}}</h4>
+                </div>
+              </div>
+              <div class="row" data-ng-show="hasAttachment(result)">
+                <div class="col-md-12">
+                  <img data-ng-src="{{result.attachment.location}}"
+                       class="img-thumbnail img-responsive"
+                       imageonload>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h5>{{result.description}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-if="resultsPage.afterResults">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body" ng-bind-html="resultsPage.afterResults">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" ng-if="exitUrl != ''">
+        <div class="col-md-12 text-center">
+          <button type="submit"
+                  class="btn btn-primary"
+                  ng-click="exit()">Visit
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

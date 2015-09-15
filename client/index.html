@@ -1,0 +1,161 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+      <link rel="stylesheet" href="bower_components/angular-dialog-service/dialogs.min.css" />
+      <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-css-only/css/bootstrap.css" />
+      <link rel="stylesheet" href="bower_components/textAngular/src/textAngular.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <link rel="stylesheet" href="app/account/login/login.css">
+      <link rel="stylesheet" href="app/admin/admin.css">
+      <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/forms/forms.css">
+      <link rel="stylesheet" href="app/leads/leads.css">
+      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/questions/questions.css">
+      <link rel="stylesheet" href="app/quizzes/quizzes.css">
+      <link rel="stylesheet" href="app/results/results.css">
+      <link rel="stylesheet" href="app/startpages/startpages.css">
+      <link rel="stylesheet" href="app/survey/survey.css">
+      <link rel="stylesheet" href="components/quizmap/quizmap.css">
+      <!-- endinjector -->
+    <!-- endbuild -->
+    <link rel='stylesheet' href='assets/textAngular/src/textAngular.css'>
+  </head>
+  <body ng-app="quizAppApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js(client) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/ngDraggable/ngDraggable.js"></script>
+      <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+      <script src="bower_components/ng-file-upload-shim/angular-file-upload-shim.js"></script>
+      <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-translate/angular-translate.js"></script>
+      <script src="bower_components/angular-dialog-service/dialogs.min.js"></script>
+      <script src="bower_components/angular-dialog-service/dialogs-default-translations.min.js"></script>
+      <script src="bower_components/angular-paginate-anything/src/paginate-anything.js"></script>
+      <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+      <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+      <script src="bower_components/ng-clip/src/ngClip.js"></script>
+      <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+      <script src="bower_components/angular-dragdrop/src/angular-dragdrop.js"></script>
+      <script src="bower_components/bootstrap-duallistbox/src/jquery.bootstrap-duallistbox.js"></script>
+      <script src="bower_components/angular-bootstrap-duallistbox/dist/angular-bootstrap-duallistbox.js"></script>
+      <script src="bower_components/amcharts/dist/amcharts/amcharts.js"></script>
+      <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+      <script src="bower_components/rangy/rangy-core.min.js"></script>
+      <script src="bower_components/rangy/rangy-cssclassapplier.min.js"></script>
+      <script src="bower_components/rangy/rangy-selectionsaverestore.min.js"></script>
+      <script src="bower_components/rangy/rangy-serializer.min.js"></script>
+      <script src="bower_components/textAngular/src/textAngular.js"></script>
+      <script src="bower_components/textAngular/src/textAngular-sanitize.js"></script>
+      <script src="bower_components/textAngular/src/textAngularSetup.js"></script>
+      <script src="bower_components/angular-ui-sortable/sortable.js"></script>
+      <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+      <script src='bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+      <script src='bower_components/async/lib/async.js'></script>
+
+
+      <!-- endbower -->
+    <!-- endbuild -->
+    <script src="bower_components/amcharts/dist/amcharts/serial.js"></script>
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="app/app.js"></script>
+          <!-- injector:js -->
+          <script src="app/account/account.js"></script>
+          <script src="app/account/login/login.controller.js"></script>
+          <script src="app/account/settings/settings.account.controller.js"></script>
+          <script src="app/account/settings/settings.controller.js"></script>
+          <script src="app/account/settings/settings.form-fields.controller.js"></script>
+          <script src="app/account/settings/settings.lead-collection.controller.js"></script>
+          <script src="app/account/settings/settings.markets.controller.js"></script>
+          <script src="app/account/settings/settings.profile.controller.js"></script>
+          <script src="app/account/signup/signup.controller.js"></script>
+          <script src="app/admin/admin.controller.js"></script>
+          <script src="app/admin/admin.js"></script>
+          <script src="app/forms/forms.add.controller.js"></script>
+          <script src="app/forms/forms.controller.js"></script>
+          <script src="app/forms/forms.js"></script>
+          <script src="app/leads/leads.controller.js"></script>
+          <script src="app/leads/leads.js"></script>
+          <script src="app/main/main.controller.js"></script>
+          <script src="app/main/main.js"></script>
+          <script src="app/questions/questions.add.controller.js"></script>
+          <script src="app/questions/questions.controller.js"></script>
+          <script src="app/questions/questions.js"></script>
+          <script src="app/quizzes/quizzes.add.controller.js"></script>
+          <script src="app/quizzes/quizzes.controller.js"></script>
+          <script src="app/quizzes/quizzes.js"></script>
+          <script src="app/results/results-pages.add.controller.js"></script>
+          <script src="app/results/results-pages.controller.js"></script>
+          <script src="app/results/results.add.controller.js"></script>
+          <script src="app/results/results.controller.js"></script>
+          <script src="app/results/results.js"></script>
+          <script src="app/startpages/startpages.add.controller.js"></script>
+          <script src="app/startpages/startpages.controller.js"></script>
+          <script src="app/startpages/startpages.js"></script>
+          <script src="app/survey/survey.controller.js"></script>
+          <script src="app/survey/survey.js"></script>
+          <script src="components/auth/auth.service.js"></script>
+          <script src="components/auth/user.service.js"></script>
+          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/quizmap/dragging_service.js"></script>
+          <script src="components/quizmap/mouse_capture_service.js"></script>
+          <script src="components/quizmap/quizmap.directive.js"></script>
+          <script src="components/quizmap/quizmap_viewmodel.js"></script>
+          <script src="components/quizmap/svg_class.js"></script>
+          <script src="components/xml2json/xml2json.js"></script>
+          <script src='components/nwFileDialog/nw-fileDialog.js'></script>
+          <!-- endinjector -->
+        <!-- endbuild -->
+</body>
+</html>

@@ -1,0 +1,159 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+    <div class="container">
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h4 class="page-header">Quizzes</h4>
+            <section class="panel panel-default table-dynamic top-buffer">
+                <div class="table-filters">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form>
+                                <input type="text"
+                                       placeholder="Search Quiz"
+                                       class="form-control"
+                                       data-ng-model="searchKeywords"
+                                       data-ng-keyup="search()">
+                            </form>
+                        </div>
+                        <div class="col-md-3 filter-result-info">
+                            <span>
+                                Showing {{filteredQuizzes.length}}/{{quizzes.length}} quizzes
+                            </span>
+                        </div>
+                        <div class="col-md-5 text-right">
+                            <button type="button" class="btn btn-primary" ui-sref="quizzes.add">Add New Quiz</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive table-bordered">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th><div class="th">
+                                Quiz
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('title') "
+                                      data-ng-class="{active: row == 'title'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-title') "
+                                      data-ng-class="{active: row == '-title'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Impressions
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('landed') "
+                                      data-ng-class="{active: row == 'landed'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-landed') "
+                                      data-ng-class="{active: row == '-landed'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Quiz Completed
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('completed') "
+                                      data-ng-class="{active: row == 'completed'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-completed') "
+                                      data-ng-class="{active: row == '-completed'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Leads
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('leadCount') "
+                                      data-ng-class="{active: row == 'leadCount'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-leadCount') "
+                                      data-ng-class="{active: row == '-leadCount'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Start Date
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('startedAt') "
+                                      data-ng-class="{active: row == 'startedAt'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-startedAt') "
+                                      data-ng-class="{active: row == '-startedAt'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Last Lead
+                                <span class="glyphicon glyphicon-chevron-up"
+                                      data-ng-click=" order('lastLead') "
+                                      data-ng-class="{active: row == 'lastLead'}"></span>
+                                <span class="glyphicon glyphicon-chevron-down"
+                                      data-ng-click=" order('-lastLead') "
+                                      data-ng-class="{active: row == '-lastLead'}"></span>
+                            </div></th>
+                            <th><div class="th">
+                                Action
+                            </div></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="quiz in currentPageQuizzes">
+                            <td style="max-width: 150px;">{{quiz.title}}</td>
+                            <td>{{quiz.landed}}</td>
+                            <td>{{quiz.completed}} ({{printPercentage(quiz.completed,quiz.landed)}}%)</td>
+                            <td>{{quiz.leadCount}} ({{printPercentage(quiz.leadCount,quiz.landed)}}%)</td>
+                            <td>{{quiz.startedAt|date:'dd MMM yyyy'}}</td>
+                            <td>{{quiz.lastLead|date:'dd MMM yyyy'}}</td>
+                            <td class="icon-btns">
+                                <span class="glyphicon glyphicon-off" data-ng-click="activate(quiz)" data-ng-hide="isActive(quiz)" tooltip="Activate"></span>
+                                <span class="glyphicon glyphicon-ban-circle" data-ng-click="deactivate(quiz)" data-ng-show="isActive(quiz)" tooltip="Deactivate"></span>
+                                <span class="glyphicon glyphicon-link" data-ng-click="directLink(quiz)" tooltip="Direct Link"></span>
+                                <span class="glyphicon glyphicon-pushpin" data-ng-click="embedLink(quiz)" tooltip="Embed Code"></span>
+                                <span class="glyphicon glyphicon-file" data-ng-click="clone(quiz)" tooltip="Clone"></span>
+                                <span class="glyphicon glyphicon-pencil" ui-sref="quizzes.edit({id:quiz._id})" tooltip="Edit" data-ng-if="isEditable(quiz)"></span>
+                                <span class="glyphicon glyphicon-pencil glyphicon-disabled" data-ng-if="!isEditable(quiz)"></span>
+                                <span class="glyphicon glyphicon-folder-open" ui-sref="quizzes.view({id:quiz._id})" tooltip="View"></span>
+                                <span class="glyphicon glyphicon-trash" data-ng-click="delete(quiz)" tooltip="Delete" data-ng-if="isEditable(quiz)"></span>
+                                <span class="glyphicon glyphicon-trash glyphicon-disabled" data-ng-if="!isEditable(quiz)"></span>
+                                <span class="glyphicon glyphicon-export" ng-csv="export(quiz)" lazy-load="true" filename="{{quiz.title}}" tooltip="Export" data-ng-if="quiz.leadCount > 0"></span>
+                                <span class="glyphicon glyphicon-export glyphicon-disabled" data-ng-if="quiz.leadCount<=0"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <footer class="table-footer">
+                    <div class="row">
+                        <div class="col-md-6 page-num-info">
+                            <span>
+                                Show
+                                <select data-ng-model="numPerPage"
+                                        data-ng-options="num for num in numPerPageOpt"
+                                        data-ng-change="onNumPerPageChange()">
+                                </select>
+                                quizzes per page
+                            </span>
+                        </div>
+                        <div class="col-md-6 text-right pagination-container">
+                            <pagination class="pagination-sm"
+                                        ng-model="currentPage"
+                                        total-items="filteredQuizzes.length"
+                                        max-size="4"
+                                        ng-change="select(currentPage)"
+                                        items-per-page="numPerPage"
+                                        rotate="false"
+                                        boundary-links="true"></pagination>
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12" ui-view>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'components/navbar/navbar-bottom.html'"></div>

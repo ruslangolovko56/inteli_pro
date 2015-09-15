@@ -1,0 +1,283 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h4 class="page-header">Leads</h4>
+      <section class="panel panel-default table-dynamic top-buffer">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Find Leads Filter</strong></div>
+
+        <div class="table-filters">
+          <!--<div class="row">-->
+          <!--<div class="col-md-12 text-right">-->
+          <!--<button type="button" class="btn btn-primary btn-xs" ng-click="addCondition()">-->
+          <!--Add Condition-->
+          <!--</button>-->
+          <!--</div>-->
+          <!--</div>-->
+          <form name="form_filter" novalidate class="form form-validation" ng-submit="search(form_filter)">
+            <div class="row">
+              <div class="col-md-12 table-responsive" style="padding-left: 20px; padding-right: 20px;">
+                <table class="table">
+                  <!--<thead>-->
+                  <!--<tr>-->
+                  <!--<th class="col-md-4">-->
+                  <!--<div class="th">-->
+                  <!--Name-->
+                  <!--</div>-->
+                  <!--</th>-->
+                  <!--<th class="col-md-2">-->
+                  <!--<div class="th">-->
+                  <!--Condition-->
+                  <!--</div>-->
+                  <!--</th>-->
+                  <!--<th class="col-md-4">-->
+                  <!--<div class="th">-->
+                  <!--Value-->
+                  <!--</div>-->
+                  <!--</th>-->
+                  <!--<th class="col-md-2">-->
+                  <!--<div class="th">-->
+                  <!--Operation-->
+                  <!--</div>-->
+                  <!--</th>-->
+                  <!--</tr>-->
+                  <!--</thead>-->
+                  <tbody>
+                  <tr ng-repeat="condition in conditions track by $index" ng-form="form_condition">
+                    <td class="col-md-4">
+                      <div class="form-group"
+                           ng-class="{ 'has-error': form_condition.name.$invalid && submitted }">
+                        <select name="name" class="form-control" ng-model="condition.filter"
+                                ng-options="filter as filter.name for filter in filters"
+                                data-ng-change="changeFilter(condition)" ng-required="true">
+                          <option value="" disabled selected>Name</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="col-md-2">
+                      <div class="form-group"
+                           ng-class="{ 'has-error': form_condition.condition.$invalid && submitted }">
+                        <select name="condition" class="form-control" ng-model="condition.condition"
+                                ng-options="con for con in condition.filter.conditions" ng-required="true">
+                          <option value="" disabled selected>Condition</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td class="col-md-3">
+                      <div class="form-group"
+                           ng-class="{ 'has-error': form_condition.value.$invalid && submitted }"
+                           ng-if="condition.filter.type == 'dropdown' || !condition.filter.type">
+                        <select name="value" class="form-control" ng-model="condition.value"
+                                ng-options="value.value as value.value for value in condition.filter.values"
+                                ng-required="true">
+                          <option value="" disabled selected>Value</option>
+                        </select>
+                      </div>
+
+                      <p class="input-group" ng-class="{ 'has-error': form_condition.value.$invalid && submitted }"
+                         ng-if="condition.filter.type == 'date'">
+                        <input name="value" type="text" class="form-control" datepicker-popup="{{format}}"
+                               ng-model="condition.value"
+                               is-open="condition.datePickerOpened" ng-required="true" placeholder="Value"
+                               close-text="Close"/>
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default"
+                                  ng-click="openDateTimePicker($event, condition)">
+                            <i
+                              class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </p>
+
+                      <div class="form-group" ng-class="{ 'has-error': form_condition.value.$invalid && submitted }"
+                           ng-if="condition.filter.type == 'text'">
+                        <input name="value" type="text" class="form-control" placeholder="Value"
+                               ng-model="condition.value" ng-required="true">
+                      </div>
+
+                      <div class="form-group" ng-class="{ 'has-error': form_condition.value.$invalid && submitted }"
+                           ng-if="condition.filter.type == 'email'">
+                        <input type="text" class="form-control" placeholder="Value" ng-model="condition.value">
+                      </div>
+                    </td>
+                    <!--<td class="col-md-2">-->
+                      <!--<div class="form-group"-->
+                           <!--ng-class="{ 'has-error': form_condition.operation.$invalid && submitted }">-->
+                        <!--<select name="operation" class="form-control" ng-model="condition.operation"-->
+                                <!--ng-options="operation for operation in operations" ng-required="true">-->
+                          <!--<option value="" disabled selected>Operation</option>-->
+                        <!--</select>-->
+                      <!--</div>-->
+                    <!--</td>-->
+                    <td class="col-md-1 icon-btns">
+                      <span class="glyphicon glyphicon-trash" data-ng-click="delete(condition)" tooltip="Delete"
+                            style="vertical-align: -webkit-baseline-middle;"></span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 text-left">
+                <button type="button" class="btn btn-primary" ng-click="addCondition()">
+                  Add Condition
+                </button>
+              </div>
+              <div class="col-md-6 text-right">
+                <button type="submit" class="btn btn-normal">
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+          <!--<div class="row">-->
+          <!--<div class="col-sm-4 col-xs-4">-->
+          <!--<form>-->
+          <!--<input type="text"-->
+          <!--placeholder="Search Leads"-->
+          <!--class="form-control"-->
+          <!--data-ng-model="urlParams.searchKeywords">-->
+          <!--</form>-->
+          <!--</div>-->
+          <!--<div class="col-sm-3 col-xs-4 filter-result-info">-->
+          <!--<span>-->
+          <!--Showing {{rangeTo - rangeFrom + 1}}/{{totalCount}} leads-->
+          <!--</span>-->
+          <!--</div>-->
+          <!--</div>-->
+        </div>
+
+        <div class="table-responsive table-bordered">
+          <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>
+                <div class="th">
+                  Email Address
+                                  <span class="glyphicon glyphicon-chevron-up"
+                                        data-ng-click=" order('email') "
+                                        data-ng-class="{active: row == 'email'}"></span>
+                                  <span class="glyphicon glyphicon-chevron-down"
+                                        data-ng-click=" order('-email') "
+                                        data-ng-class="{active: row == '-email'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Quiz Completed
+                                  <span class="glyphicon glyphicon-chevron-up"
+                                        data-ng-click=" order('quiz.title') "
+                                        data-ng-class="{active: row == 'quiz.title'}"></span>
+                                  <span class="glyphicon glyphicon-chevron-down"
+                                        data-ng-click=" order('-quiz.title') "
+                                        data-ng-class="{active: row == '-quiz.title'}"></span>
+                </div>
+              </th>
+              <th>
+                <div class="th">
+                  Date Completed
+                                  <span class="glyphicon glyphicon-chevron-up"
+                                        data-ng-click=" order('created') "
+                                        data-ng-class="{active: row == 'created'}"></span>
+                                  <span class="glyphicon glyphicon-chevron-down"
+                                        data-ng-click=" order('-created') "
+                                        data-ng-class="{active: row == '-created'}"></span>
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="lead in currentPageLeads" ng-click="displayPath(lead)" style="cursor: pointer;"
+                ng-class="leadRowClass(lead)">
+              <td>{{lead.email}}</td>
+              <td>{{lead.quiz.title}}</td>
+              <td>{{lead.created|date:'dd MMM yyyy'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="table-footer">
+          <bgf-pagination
+            collection="currentPageLeads"
+            url="'/api/leads'"
+            url-params="urlParams"
+            template-url="app/leads/paginate-anything.html"
+            per-page-presets="numPerPageOpt"
+            per-page="numPerPage"
+            auto-presets="false"
+            num-items="totalCount"
+            range-from="rangeFrom"
+            range-to="rangeTo">
+          </bgf-pagination>
+        </footer>
+
+        <!--<footer class="table-footer">-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-6 page-num-info">-->
+        <!--<span>-->
+        <!--Show-->
+        <!--<select data-ng-model="numPerPage"-->
+        <!--data-ng-options="num for num in numPerPageOpt"-->
+        <!--data-ng-change="onNumPerPageChange()">-->
+        <!--</select>-->
+        <!--leads per page-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--<div class="col-md-6 text-right pagination-container">-->
+        <!--<pagination class="pagination-sm"-->
+        <!--ng-model="currentPage"-->
+        <!--total-items="filteredLeads.length"-->
+        <!--max-size="4"-->
+        <!--ng-change="select(currentPage)"-->
+        <!--items-per-page="numPerPage"-->
+        <!--rotate="false"-->
+        <!--boundary-links="true"></pagination>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+        <!--&lt;!&ndash;<begriffs.pagination&ndash;&gt;-->
+        <!--&lt;!&ndash;collection="currentPageLeads"&ndash;&gt;-->
+        <!--&lt;!&ndash;url="'/aip/leads'"&ndash;&gt;-->
+        <!--&lt;!&ndash;template-url="app/leads/paginate-anything.html">&ndash;&gt;-->
+        <!--&lt;!&ndash;</begriffs.pagination>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</footer>-->
+      </section>
+    </div>
+  </div>
+  <div class="row" ng-if="currentLead" style="margin: 0 200px; padding: 20px; background-color: #EEE; border-radius: 8px;">
+    <div class="col-md-6" style="padding-right: 5px;">
+      <div class="row text-center" style="margin-right: 5px;">
+        <h4>Question</h4>
+      </div>
+      <div ng-repeat="path in currentLead.path" class="row" style="margin-bottom: 10px; margin-right: 5px;">
+        <div class="alert alert-info" style="margin-bottom: 0px;" role="alert">{{path.question.text}}</div>
+        <!--<div class="callout callout-success">-->
+          <!--<p>{{path.question.text}}</p>-->
+        <!--</div>-->
+      </div>
+    </div>
+    <div class="col-md-6" style="padding-left: 5px; /**border-left: 4px solid #efefef;**/">
+      <div class="row text-center" style="margin-right: 5px;">
+        <h4>Answer</h4>
+      </div>
+      <div ng-repeat="path in currentLead.path" class="row" style="margin-bottom: 10px; margin-left: 5px;">
+        <div class="alert alert-danger" style="margin-bottom: 0px;" role="alert">{{displayAnswerText(path)}}</div>
+        <!--<div class="callout callout-info">-->
+          <!--<p>{{displayAnswerText(path)}}</p>-->
+        <!--</div>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'components/navbar/navbar-bottom.html'"></div>

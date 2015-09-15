@@ -1,0 +1,26 @@
+<div class="modal-header dialog-header-confirm">
+    <button type="button" class="close" ng-click="close()">&times;</button>
+    <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Embed Code</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="">Copy and paste the below code into your web page.</label>
+            <div class="col-sm-12">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" data-ng-model="form.align"> <span>Align center of the page</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="callout callout-info">
+                    <p>{{form.embedLink}}</p>
+                </div>
+                <div class="text-right">
+                    <button type="button" class="btn btn-default" clip-copy="getTextToCopy()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

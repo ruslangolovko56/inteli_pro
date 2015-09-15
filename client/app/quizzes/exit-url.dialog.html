@@ -1,0 +1,18 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Set Exit URL</h4>
+</div>
+<div class="modal-body">
+  <form name="form_exiturl" novalidate class="form-validation">
+    <div class="form-group">
+      <label for="">URL:</label>
+      <div class="col-sm-12">
+        <input type="url" name="" id="" class="form-control" data-ng-model="data.url" required>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-ng-click="save()" data-ng-disabled="!canSubmit()">Save</button>
+  <button type="button" class="btn btn-primary" data-ng-click="close()">Cancel</button>
+</div>

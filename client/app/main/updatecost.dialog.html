@@ -1,0 +1,55 @@
+<div class="modal-header dialog-header-confirm">
+  <button type="button" class="close" ng-click="close()">&times;</button>
+  <h4 class="modal-title"><span class="glyphicon glyphicon-check"></span> Update Cost</h4>
+</div>
+<div class="modal-body">
+  <form class="form form-validation" name="form_updatecost" novalidate>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Leads</label>
+      </div>
+      <div class="col-sm-9">
+        {{quiz.leadCount}}
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Total Cost</label>
+      </div>
+      <div class="col-sm-9">
+          <input type="number" class="form-control" data-ng-model="form.totalCost" placeholder="Total cost"
+                 ng-required="true">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Update Date</label>
+      </div>
+      <div class="col-sm-9">
+        <p class="input-group" style="margin-bottom: 0px !important;">
+          <input name="value" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="form.updateDate"
+                 is-open="form.datePickerOpened" ng-required="true" placeholder="Update date" close-text="Close"/>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="openDatePicker($event)">
+              <i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="">Cost Per Lead</label>
+      </div>
+      <div class="col-sm-9">
+        {{getCostPerLead()}}
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" ng-click="update(form_updatecost)" data-ng-disabled="!canSubmit()">Update</button>
+  <button type="button" class="btn btn-primary" ng-click="close()">Cancel</button>
+</div>
